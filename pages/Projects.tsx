@@ -1,0 +1,98 @@
+
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { PROJECTS } from '../constants';
+import { ProjectCategory } from '../types';
+
+const Projects: React.FC = () => {
+  const [filter, setFilter] = useState<ProjectCategory | 'All'>('All');
+
+  const categories: (ProjectCategory | 'All')[] = ['All', 'Institutional', 'Residential', 'Healthcare', 'Infrastructure'];
+
+  const filteredProjects = filter === 'All' 
+    ? PROJECTS 
+    : PROJECTS.filter(p => p.category === filter);
+
+  return (
+    <div className="pt-40 pb-32 bg-[#F8F7F4] min-h-screen">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <header className="mb-24">
+          <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#5F6B75] mb-8 block">The Portfolio</span>
+          <h1 className="text-6xl md:text-9xl font-serif text-[#1A1A1A] mb-12 leading-[0.8] italic">Engineering <br /> <span className="not-italic text-opacity-90">Precision.</span></h1>
+          
+          <div className="flex flex-wrap gap-4 border-b border-[#E5E5E5] pb-10">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setFilter(cat)}
+                className={`text-[9px] uppercase font-bold tracking-[0.3em] px-8 py-4 transition-all duration-300 border ${
+                  filter === cat 
+                    ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-lg' 
+                    : 'bg-white text-[#5F6B75] border-[#E5E5E5] hover:border-[#1A1A1A] hover:text-[#1A1A1A]'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </header>
+
+        <motion.div 
+          layout
+          className="grid grid-cols-1 lg:grid-cols-2 gap-16"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="group cursor-pointer bg-white border border-[#E5E5E5]/40 shadow-sm overflow-hidden"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.name} 
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" 
+                  />
+                  <div className="absolute inset-0 bg-[#1A1A1A]/10 group-hover:bg-transparent transition-all" />
+                  <div className="absolute top-8 right-8 flex flex-col items-end gap-2">
+                    <span className="bg-white px-4 py-2 text-[8px] font-bold uppercase tracking-[0.2em] shadow-sm text-[#1A1A1A]">
+                      {project.status}
+                    </span>
+                    <span className="bg-[#1E2B3A] text-white px-4 py-2 text-[8px] font-bold uppercase tracking-[0.2em]">
+                      {project.category}
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="p-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                  <div className="max-w-md">
+                    <h3 className="text-2xl font-serif text-[#1A1A1A] mb-3 leading-tight">{project.name}</h3>
+                    <div className="h-px w-8 bg-[#3C6E71] mb-5" />
+                    <p className="text-[#5F6B75] text-[10px] uppercase tracking-[0.2em] font-medium opacity-80">{project.client}</p>
+                  </div>
+                  <div className="md:text-right flex flex-col gap-1 border-l md:border-l-0 md:border-r border-[#E5E5E5] pl-6 md:pl-0 md:pr-6">
+                    <span className="text-[9px] text-[#5F6B75] uppercase tracking-[0.2em] font-bold opacity-50">Site Location</span>
+                    <span className="text-[11px] text-[#1A1A1A] font-medium tracking-wide uppercase">{project.location}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+        
+        {filteredProjects.length === 0 && (
+          <div className="py-48 text-center border border-dashed border-[#E5E5E5]">
+            <p className="text-[#5F6B75] text-[10px] uppercase tracking-[0.5em] font-light">End of Portfolio Records.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Projects;
