@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
             >
               N
             </div>
-            <span className="text-lg sm:text-xl font-bold tracking-tighter uppercase truncate">NGK Infra</span>
+            <span className="text-base sm:text-lg md:text-xl font-bold tracking-tighter uppercase truncate">NGK Infra</span>
           </Link>
 
           <div className="hidden md:flex items-center space-x-10">
@@ -68,7 +68,7 @@ const Navbar: React.FC = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`text-[11px] font-bold uppercase tracking-[0.2em] relative group transition-colors ${
+                className={`text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] relative group transition-colors ${
                   darkNav ? 'text-[#5F6B75] hover:text-[#1A1A1A]' : 'text-white/70 hover:text-white'
                 }`}
               >
@@ -82,7 +82,7 @@ const Navbar: React.FC = () => {
             ))}
             <Link
               to="/contact"
-              className={`px-7 py-3 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-300 ${
+              className={`px-6 md:px-7 py-3 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300 ${
                 darkNav ? 'bg-[#1A1A1A] text-white hover:bg-[#1E2B3A]' : 'bg-white text-[#1A1A1A] hover:bg-[#F8F7F4]'
               }`}
             >
@@ -129,7 +129,7 @@ const Navbar: React.FC = () => {
               transition={{ type: 'tween', duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
             >
               <div className="flex items-center justify-between px-5 py-4 border-b border-[#E5E5E5]">
-                <span className="text-sm font-bold uppercase tracking-wider text-[#1A1A1A]">Menu</span>
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1A1A1A]">Menu</span>
                 <button
                   type="button"
                   aria-label="Close menu"
@@ -149,7 +149,7 @@ const Navbar: React.FC = () => {
                   >
                     <Link
                       to={link.path}
-                      className={`block py-3 text-[13px] font-bold uppercase tracking-[0.2em] ${
+                      className={`block py-3.5 text-sm sm:text-[13px] font-bold uppercase tracking-[0.2em] ${
                         location.pathname === link.path ? 'text-[#1A1A1A]' : 'text-[#5F6B75]'
                       } hover:text-[#1A1A1A] active:opacity-80`}
                       onClick={() => setMobileOpen(false)}
@@ -166,7 +166,7 @@ const Navbar: React.FC = () => {
                 >
                   <Link
                     to="/contact"
-                    className="block w-full text-center py-4 bg-[#1A1A1A] text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#1E2B3A] active:opacity-90"
+                    className="block w-full text-center py-4 bg-[#1A1A1A] text-white text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-[#1E2B3A] active:opacity-90"
                     onClick={() => setMobileOpen(false)}
                   >
                     Start a Project

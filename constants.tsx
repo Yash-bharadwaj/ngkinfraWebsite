@@ -59,7 +59,7 @@ export const PROJECTS: Project[] = [
     status: 'Ongoing',
     description: 'Infrastructure development for a premier international educational institution.',
     scope: ['Educational Spaces', 'Safety Systems', 'Large-scale Infrastructure'],
-    image: 'https://images.unsplash.com/photo-1541829070764-84a7d30dee63?auto=format&fit=crop&q=80&w=1200'
+    image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=1200'
   },
   {
     id: 'railway-building',
