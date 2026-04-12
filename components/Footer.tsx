@@ -1,17 +1,20 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+import logoOnDark from '../NGK-LOGO-WHITE.png';
 
 const Footer: React.FC = () => {
   return (
     <footer className="bg-[#1A1A1A] text-[#5F6B75] py-16 sm:py-24 px-4 sm:px-6 md:px-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 sm:gap-20">
         <div className="col-span-1 md:col-span-1">
-          <Link to="/" className="flex items-center space-x-2 text-white mb-8">
-            <div className="w-8 h-8 flex items-center justify-center font-bold border-2 border-white transition-colors">
-              N
-            </div>
-            <span className="text-lg sm:text-xl font-bold tracking-tighter uppercase">NGK Infra</span>
+          <Link to="/" className="mb-8 inline-block max-w-full text-white">
+            <img
+              src={logoOnDark}
+              alt="NGK Infra — Construction & Interiors"
+              width={1000}
+              height={300}
+              className="h-10 w-auto max-h-[3.75rem] object-contain object-left sm:h-12 md:h-14 lg:h-16 max-w-full"
+            />
           </Link>
           <p className="text-[10px] sm:text-[11px] leading-relaxed mb-8 uppercase tracking-widest font-light">
             An engineering-led boutique <br /> consultancy redefining the <br /> building experience.
@@ -24,7 +27,6 @@ const Footer: React.FC = () => {
             <li><Link to="/about" className="hover:text-white transition-colors py-2 inline-block min-h-[44px] flex items-center">The Firm</Link></li>
             <li><Link to="/projects" className="hover:text-white transition-colors py-2 inline-block min-h-[44px] flex items-center">Showcase</Link></li>
             <li><Link to="/expertise" className="hover:text-white transition-colors py-2 inline-block min-h-[44px] flex items-center">Sectors</Link></li>
-            <li><Link to="/process" className="hover:text-white transition-colors py-2 inline-block min-h-[44px] flex items-center">Methodology</Link></li>
           </ul>
         </div>
 

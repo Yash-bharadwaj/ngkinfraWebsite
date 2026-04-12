@@ -21,6 +21,10 @@ export const COLORS = {
   divider: '#E5E5E5'
 };
 
+/** +91 96763 88678 — digits only for wa.me */
+export const WHATSAPP_PHONE_E164 = '919676388678';
+export const WHATSAPP_CHAT_URL = `https://wa.me/${WHATSAPP_PHONE_E164}`;
+
 export const PROJECTS: Project[] = [
   {
     id: 'hrdc-uoh',

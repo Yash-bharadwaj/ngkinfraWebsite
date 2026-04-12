@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import logoColor from '../NGK-LOGO.png';
+import logoOnDark from '../NGK-LOGO-WHITE.png';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,8 +37,6 @@ const Navbar: React.FC = () => {
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
     { name: 'Projects', path: '/projects' },
-    { name: 'Process', path: '/process' },
-    { name: 'Contact', path: '/contact' },
   ];
 
   const isHome = location.pathname === '/';
@@ -45,25 +45,27 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-4 py-3 sm:px-6 md:px-12 md:py-4 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-3 py-2 sm:px-4 sm:py-2 md:px-8 md:py-2.5 lg:px-10 ${
           isScrolled
-            ? 'bg-[#F8F7F4]/95 backdrop-blur-lg shadow-sm border-b border-[#E5E5E5] py-3'
+            ? 'bg-[#F8F7F4]/95 backdrop-blur-lg shadow-sm border-b border-[#E5E5E5]'
             : isHome ? 'bg-transparent text-white' : 'bg-[#F8F7F4] text-[#1A1A1A] border-b border-[#E5E5E5]'
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2 min-w-0">
-            <div
-              className={`w-8 h-8 flex-shrink-0 flex items-center justify-center font-bold border-2 transition-colors ${
-                darkNav ? 'border-[#1A1A1A] text-[#1A1A1A]' : 'border-white text-white'
-              }`}
-            >
-              N
-            </div>
-            <span className="text-base sm:text-lg md:text-xl font-bold tracking-tighter uppercase truncate">NGK Infra</span>
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+          <Link
+            to="/"
+            className="flex min-w-0 flex-1 items-center md:flex-initial md:max-w-[58%] lg:max-w-[min(460px,44%)] xl:max-w-[480px]"
+          >
+            <img
+              src={darkNav ? logoColor : logoOnDark}
+              alt="NGK Infra — Construction & Interiors"
+              width={1000}
+              height={300}
+              className="h-9 w-auto object-contain object-left sm:h-10 md:h-11 lg:h-12 xl:h-14 max-w-full"
+            />
           </Link>
 
-          <div className="hidden md:flex items-center space-x-10">
+          <div className="hidden shrink-0 items-center space-x-6 md:flex lg:space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -82,7 +84,7 @@ const Navbar: React.FC = () => {
             ))}
             <Link
               to="/contact"
-              className={`px-6 md:px-7 py-3 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300 ${
+              className={`px-4 md:px-6 py-2.5 text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300 ${
                 darkNav ? 'bg-[#1A1A1A] text-white hover:bg-[#1E2B3A]' : 'bg-white text-[#1A1A1A] hover:bg-[#F8F7F4]'
               }`}
             >
@@ -94,7 +96,7 @@ const Navbar: React.FC = () => {
             type="button"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-md -mr-1 touch-manipulation active:scale-95 transition-transform"
+            className="md:hidden flex shrink-0 items-center justify-center w-9 h-9 -mr-0.5 touch-manipulation active:scale-95 transition-transform"
             onClick={() => setMobileOpen((o) => !o)}
           >
             {mobileOpen ? (

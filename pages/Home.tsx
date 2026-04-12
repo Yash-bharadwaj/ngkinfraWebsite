@@ -1,14 +1,98 @@
 
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, ChevronDown } from 'lucide-react';
-import { PROJECTS, ATTRIBUTES, PROCESS_STEPS, CLIENTS, COLORS } from '../constants';
-import * as Icons from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
+import { PROJECTS, CLIENTS } from '../constants';
+
+type StatDef =
+  | { label: string; accent: string; kind: 'count'; end: number; suffix: string }
+  | { label: string; accent: string; kind: 'text'; value: string };
+
+const STATS_DATA: StatDef[] = [
+  { label: 'EPC Delivery', accent: 'text-[#3C6E71]', kind: 'count', end: 100, suffix: '%' },
+  { label: 'Luxury Scale', accent: 'text-[#1E2B3A]', kind: 'count', end: 11, suffix: 'k SFT' },
+  { label: 'Alumni Core', accent: 'text-[#1A1A1A]', kind: 'text', value: 'NICMAR' },
+  { label: 'Project Growth', accent: 'text-[#5F6B75]', kind: 'count', end: 250, suffix: '%' },
+];
+
+const StatAnimatedValue: React.FC<{
+  stat: StatDef;
+  index: number;
+  active: boolean;
+}> = ({ stat, index, active }) => {
+  const [display, setDisplay] = useState(0);
+  const staggerMs = index * 110;
+
+  useEffect(() => {
+    if (!active || stat.kind !== 'count') return;
+    let cancelled = false;
+    let rafId = 0;
+    const duration = 1650;
+    const startAt = performance.now() + staggerMs;
+
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    const tick = (now: number) => {
+      if (cancelled) return;
+      if (now < startAt) {
+        rafId = requestAnimationFrame(tick);
+        return;
+      }
+      const elapsed = now - startAt;
+      const p = Math.min(elapsed / duration, 1);
+      setDisplay(Math.round(stat.end * easeOut(p)));
+      if (p < 1) rafId = requestAnimationFrame(tick);
+    };
+
+    rafId = requestAnimationFrame(tick);
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(rafId);
+    };
+  }, [active, stat, staggerMs]);
+
+  if (stat.kind === 'text') {
+    return (
+      <motion.span
+        initial={{ opacity: 0, y: 12 }}
+        animate={active ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.55, delay: index * 0.09, ease: [0.25, 0.46, 0.45, 0.94] }}
+      >
+        {stat.value}
+      </motion.span>
+    );
+  }
+
+  return (
+    <span>
+      {display}
+      {stat.suffix}
+    </span>
+  );
+};
+
+const statsStripContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.14, delayChildren: 0.06 },
+  },
+};
+
+const statsStripItem = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
 
 const Home: React.FC = () => {
   const scrollRef = useRef(null);
-  const { scrollYProgress } = useScroll();
-  
+  const statsStripRef = useRef<HTMLDivElement>(null);
+  const statsInView = useInView(statsStripRef, { once: true, amount: 0.35 });
+
   // Reference the specific project for the showcase
   const hrdcProject = PROJECTS.find(p => p.id === 'hrdc-uoh');
 
@@ -30,24 +114,18 @@ const Home: React.FC = () => {
             <span className="text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.35em] sm:tracking-[0.45em] md:tracking-[0.5em] text-[#5F6B75] mb-6 sm:mb-8 block">
               ENGINEERING-FIRST DESIGN & BUILD
             </span>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[8rem] xl:text-[10rem] font-serif mb-4 sm:mb-6 leading-none tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[8rem] xl:text-[10rem] font-serif mb-4 sm:mb-5 md:mb-6 leading-none tracking-tight">
               NGK Infra.
             </h1>
-            <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-serif italic font-light text-white/80 mb-8 sm:mb-10 tracking-wide">
-              Specialized Construction.
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg text-white/70 max-w-2xl mx-auto mb-10 sm:mb-14 font-light leading-relaxed tracking-wide px-0">
+            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif italic font-light text-white/85 mb-8 sm:mb-10 md:mb-12 tracking-wide">
+              Construction & Interiors
+            </p>
+            <p className="text-sm sm:text-base md:text-lg text-white/70 max-w-2xl mx-auto mb-8 sm:mb-10 font-light leading-relaxed tracking-wide px-0">
               We specialize in the precise execution of <strong>Institutional</strong>, <strong>Residential</strong>, and <strong>Healthcare</strong> projects. From concept to completion, we deliver infrastructure built on technical depth and absolute accountability.
             </p>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 sm:gap-8">
-              <a href="#/projects" className="min-h-[48px] flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 bg-white text-[#1A1A1A] font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs hover:bg-[#F8F7F4] active:scale-[0.98] transition-all shadow-xl">
-                View Portfolio 
-                <ArrowRight className="ml-3 w-4 h-4 shrink-0" />
-              </a>
-              <a href="#/about" className="min-h-[48px] flex items-center justify-center px-8 sm:px-12 py-4 sm:py-5 border border-white/20 text-white font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs hover:bg-white/10 active:scale-[0.98] transition-all">
-                The NGK Process
-              </a>
-            </div>
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white">
+              100% EPC Delivery
+            </p>
           </motion.div>
         </div>
 
@@ -60,62 +138,78 @@ const Home: React.FC = () => {
         </motion.div>
       </section>
 
-      {/* SECTION 2: TRUST INDICATORS - PROFESSIONAL MARQUEE */}
-      <section className="py-16 sm:py-24 bg-white border-b border-[#E5E5E5] overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mb-12 sm:mb-16 text-center">
-          <h2 className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-[#5F6B75] mb-4 sm:mb-5">Trusted Network</h2>
-          <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-serif text-[#1A1A1A] leading-tight">
-            Partnering with <br /> <span className="italic">Elite Institutional</span> Leaders.
+      {/* SECTION 2: STATS STRIP */}
+      <section ref={statsStripRef} className="border-b border-[#E5E5E5] bg-white py-12 sm:py-14">
+        <motion.div
+          className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 sm:gap-12 sm:px-6 md:grid-cols-4 md:px-12"
+          variants={statsStripContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.45, margin: '0px 0px -60px 0px' }}
+        >
+          {STATS_DATA.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              variants={statsStripItem}
+              className="group text-center md:text-left"
+            >
+              <motion.span
+                className={`mb-2 block min-h-[2.5rem] text-2xl font-serif tabular-nums sm:mb-3 sm:min-h-[3.25rem] sm:text-3xl md:min-h-[3.75rem] md:text-4xl ${stat.accent}`}
+                whileHover={{ y: -4 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 22 }}
+              >
+                <StatAnimatedValue stat={stat} index={i} active={statsInView} />
+              </motion.span>
+              <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#5F6B75] sm:text-[10px]">
+                {stat.label}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
+      </section>
+
+      {/* SECTION 3: TRUSTED NETWORK + MARQUEE */}
+      <section className="overflow-hidden border-b border-[#E5E5E5] bg-white py-16 sm:py-24">
+        <div className="mx-auto mb-12 max-w-7xl px-4 text-center sm:mb-16 sm:px-6 md:px-12">
+          <h2 className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-[#5F6B75] sm:mb-5 sm:text-xs">
+            Trusted Network
+          </h2>
+          <p className="font-serif text-xl leading-tight text-[#1A1A1A] sm:text-2xl md:text-4xl lg:text-5xl">
+            Partnering with <br /> <span className="italic">Elite Industry</span> Leaders.
           </p>
         </div>
 
-        {/* MARQUEE CONTAINER */}
         <div className="relative">
-          {/* FADES */}
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
-          
-          <motion.div 
-            className="flex gap-16 md:gap-24 whitespace-nowrap items-center py-4"
+          <div className="absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-white to-transparent" />
+          <div className="absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-white to-transparent" />
+
+          <motion.div
+            className="flex items-center gap-16 whitespace-nowrap py-4 md:gap-24"
             animate={{ x: [0, -1920] }}
-            transition={{ 
-              duration: 50, 
-              repeat: Infinity, 
-              ease: "linear" 
+            transition={{
+              duration: 50,
+              repeat: Infinity,
+              ease: 'linear',
             }}
           >
             {marqueeClients.map((client, i) => (
-              <div 
-                key={i} 
-                className="flex items-center gap-4 px-8 py-3 bg-[#F8F7F4] border border-[#E5E5E5] rounded-sm group hover:border-[#1E2B3A] transition-colors"
+              <div
+                key={i}
+                className="group flex items-center gap-4 rounded-sm border border-[#E5E5E5] bg-[#F8F7F4] px-8 py-3 transition-colors hover:border-[#1E2B3A]"
               >
-                <div className="w-6 h-6 bg-[#1E2B3A] text-white flex items-center justify-center text-[10px] font-bold rounded-full opacity-40 group-hover:opacity-100 transition-opacity">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1E2B3A] text-[10px] font-bold text-white opacity-40 transition-opacity group-hover:opacity-100">
                   {client.charAt(0)}
                 </div>
-                <span className="text-[10px] sm:text-[11px] md:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#5F6B75] group-hover:text-[#1A1A1A] transition-colors">
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#5F6B75] transition-colors group-hover:text-[#1A1A1A] sm:text-[11px] md:text-xs sm:tracking-[0.25em]">
                   {client}
                 </span>
               </div>
             ))}
           </motion.div>
         </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mt-16 sm:mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 border-t border-[#E5E5E5] pt-12 sm:pt-16">
-          {[
-            { label: 'EPC Delivery', value: '100%', accent: 'text-[#3C6E71]' },
-            { label: 'Luxury Scale', value: '11k SFT', accent: 'text-[#1E2B3A]' },
-            { label: 'Alumni Core', value: 'NICMAR', accent: 'text-[#1A1A1A]' },
-            { label: 'Project Growth', value: '250%', accent: 'text-[#5F6B75]' },
-          ].map((stat, i) => (
-            <div key={i} className="text-center md:text-left group">
-              <span className={`block text-2xl sm:text-3xl md:text-4xl font-serif mb-2 sm:mb-3 transition-transform group-hover:-translate-y-1 ${stat.accent}`}>{stat.value}</span>
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-[#5F6B75] font-bold">{stat.label}</span>
-            </div>
-          ))}
-        </div>
       </section>
 
-      {/* SECTION 3: WHAT WE BUILD */}
+      {/* SECTION 4: WHAT WE BUILD */}
       <section className="py-20 sm:py-32 bg-[#F8F7F4]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mb-12 sm:mb-20 text-center lg:text-left">
           <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif text-[#1A1A1A] mb-4 sm:mb-6">Expertise.</h2>
@@ -174,43 +268,6 @@ const Home: React.FC = () => {
               </div>
             </motion.div>
           ))}
-        </div>
-      </section>
-
-      {/* SECTION 4: THE NGK ADVANTAGE */}
-      <section className="py-20 sm:py-32 bg-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/3 h-full blueprint-grid opacity-5 pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
-          <div className="mb-16 sm:mb-24 flex flex-col md:flex-row justify-between items-end gap-10">
-            <div className="max-w-2xl">
-              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif text-[#1A1A1A] mb-6 sm:mb-8 italic">The Philosophy.</h2>
-              <p className="text-[#5F6B75] text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed tracking-wide">Structured engineering processes that transform high-risk projects into predictable, luxury outcomes.</p>
-            </div>
-            <div className="pb-2 hidden md:block">
-               <div className="h-px w-32 bg-[#3C6E71]" />
-            </div>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[#E5E5E5] border border-[#E5E5E5]">
-            {ATTRIBUTES.map((attr, i) => {
-              const IconComp = (Icons as any)[attr.icon];
-              return (
-                <motion.div 
-                  key={attr.id} 
-                  className="bg-white p-8 sm:p-12 hover:z-10 relative group transition-all min-h-[180px] flex flex-col justify-center"
-                >
-                  <div className="w-8 h-8 text-[#5F6B75] mb-10 group-hover:text-[#1E2B3A] transition-colors">
-                    {IconComp && <IconComp strokeWidth={1} />}
-                  </div>
-                  <h4 className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] mb-4 sm:mb-5 text-[#1A1A1A]">{attr.title}</h4>
-                  <p className="text-[9px] sm:text-[10px] leading-relaxed uppercase tracking-[0.1em] font-light text-[#5F6B75]">
-                    {attr.description}
-                  </p>
-                  <div className="absolute inset-0 border-b-2 border-[#1E2B3A] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                </motion.div>
-              );
-            })}
-          </div>
         </div>
       </section>
 
