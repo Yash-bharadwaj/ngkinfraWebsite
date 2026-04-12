@@ -47,9 +47,10 @@ const FloatingSocials: React.FC<FloatingSocialsProps> = ({ leadOpen, onToggleLea
 
   const fab = (
     <div
-      className="pointer-events-none fixed bottom-20 right-4 z-[60] flex flex-col items-end gap-3 pb-[env(safe-area-inset-bottom)] sm:bottom-8 sm:right-6 sm:gap-3.5"
+      className="pointer-events-none fixed inset-x-0 bottom-0 z-[60] flex justify-end p-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pl-2 pr-[max(0.75rem,env(safe-area-inset-right,0px))] pt-0 sm:p-4 sm:pb-[max(1rem,env(safe-area-inset-bottom,0px))] sm:pr-[max(1rem,env(safe-area-inset-right,0px))] md:p-5"
       inert={leadOpen ? true : undefined}
     >
+      <div className="flex max-w-full flex-col items-end gap-2.5 sm:gap-3 md:gap-3.5">
       {/* Call — top */}
       <motion.a
         href={PHONE_CALL_HREF}
@@ -59,7 +60,7 @@ const FloatingSocials: React.FC<FloatingSocialsProps> = ({ leadOpen, onToggleLea
         transition={{ delay: 0.5, duration: 0.5 }}
         whileHover={{ scale: 1.08, x: -4 }}
         whileTap={{ scale: 0.94 }}
-        className="group pointer-events-auto relative flex h-14 w-14 touch-manipulation items-center justify-center rounded-full border-2 border-white/90 bg-gradient-to-br from-[#FF8A00] via-[#EA580C] to-[#C2410C] shadow-[0_4px_24px_rgba(234,88,12,0.55),0_8px_32px_rgba(15,23,42,0.25)] ring-2 ring-[#FDBA74]/80 transition-all duration-300"
+        className="group pointer-events-auto relative flex h-12 w-12 shrink-0 touch-manipulation items-center justify-center rounded-full border-2 border-white/90 bg-gradient-to-br from-[#FF8A00] via-[#EA580C] to-[#C2410C] shadow-[0_4px_20px_rgba(234,88,12,0.5),0_6px_24px_rgba(15,23,42,0.22)] ring-1 ring-[#FDBA74]/80 sm:h-14 sm:w-14 sm:shadow-[0_4px_24px_rgba(234,88,12,0.55),0_8px_32px_rgba(15,23,42,0.25)] sm:ring-2"
       >
         <motion.span
           className="inline-flex text-white drop-shadow-sm"
@@ -67,9 +68,9 @@ const FloatingSocials: React.FC<FloatingSocialsProps> = ({ leadOpen, onToggleLea
           animate={{ rotate: [0, -11, 11, -11, 11, 0] }}
           transition={shakeTransition}
         >
-          <Phone className="h-6 w-6" strokeWidth={2.25} />
+          <Phone className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={2.25} />
         </motion.span>
-        <span className="pointer-events-none absolute right-[calc(100%+0.75rem)] whitespace-nowrap rounded-lg bg-slate-900 px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100 sm:text-[10px]">
+        <span className="pointer-events-none absolute right-[calc(100%+0.5rem)] hidden whitespace-nowrap rounded-lg bg-slate-900 px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100 sm:right-[calc(100%+0.75rem)] sm:block sm:px-3 sm:text-[10px]">
           Call us
         </span>
       </motion.a>
@@ -86,14 +87,14 @@ const FloatingSocials: React.FC<FloatingSocialsProps> = ({ leadOpen, onToggleLea
         transition={{ delay: 0.62, duration: 0.5 }}
         whileHover={{ scale: 1.08, x: -4 }}
         whileTap={{ scale: 0.94 }}
-        className={`group pointer-events-auto relative flex h-14 w-14 touch-manipulation items-center justify-center rounded-full border-2 border-white/90 text-white shadow-[0_4px_24px_rgba(13,148,136,0.45),0_8px_28px_rgba(15,23,42,0.2)] ring-2 transition-all duration-300 ${
+        className={`group pointer-events-auto relative flex h-12 w-12 shrink-0 touch-manipulation items-center justify-center rounded-full border-2 border-white/90 text-white shadow-[0_4px_18px_rgba(13,148,136,0.42),0_6px_22px_rgba(15,23,42,0.18)] ring-1 transition-all duration-300 sm:h-14 sm:w-14 sm:shadow-[0_4px_24px_rgba(13,148,136,0.45),0_8px_28px_rgba(15,23,42,0.2)] sm:ring-2 ${
           leadOpen
             ? 'bg-gradient-to-br from-[#0F766E] via-[#0D9488] to-[#115E59] ring-[#5EEAD4]/90'
             : 'bg-gradient-to-br from-[#14B8A6] via-[#0D9488] to-[#0F766E] ring-[#99F6E4]/70'
         }`}
       >
-        <ClipboardList className="h-6 w-6 drop-shadow-sm" strokeWidth={2.25} aria-hidden />
-        <span className="pointer-events-none absolute right-[calc(100%+0.75rem)] whitespace-nowrap rounded-lg bg-slate-900 px-3 py-1 text-[9px] font-bold uppercase tracking-widest text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100 sm:text-[10px]">
+        <ClipboardList className="h-5 w-5 drop-shadow-sm sm:h-6 sm:w-6" strokeWidth={2.25} aria-hidden />
+        <span className="pointer-events-none absolute right-[calc(100%+0.5rem)] hidden whitespace-nowrap rounded-lg bg-slate-900 px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100 sm:right-[calc(100%+0.75rem)] sm:block sm:px-3 sm:text-[10px]">
           Quick form
         </span>
       </motion.button>
@@ -125,6 +126,7 @@ const FloatingSocials: React.FC<FloatingSocialsProps> = ({ leadOpen, onToggleLea
           </span>
         </motion.a>
       ))}
+      </div>
     </div>
   );
 

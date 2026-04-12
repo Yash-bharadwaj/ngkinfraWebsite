@@ -4,7 +4,7 @@ import logoOnDark from '../NGK-LOGO-WHITE.png';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#1A1A1A] text-[#5F6B75] py-16 sm:py-24 px-4 sm:px-6 md:px-12">
+    <footer className="min-w-0 overflow-x-hidden bg-[#1A1A1A] px-4 py-16 text-[#5F6B75] sm:px-6 sm:py-24 md:px-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 sm:gap-20">
         <div className="col-span-1 md:col-span-1">
           <Link to="/" className="mb-8 inline-block max-w-full text-white">

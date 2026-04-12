@@ -14,11 +14,13 @@ const Projects: React.FC = () => {
     : PROJECTS.filter(p => p.category === filter);
 
   return (
-    <div className="pt-24 sm:pt-32 md:pt-40 pb-20 sm:pb-32 bg-[#F8F7F4] min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
-        <header className="mb-16 sm:mb-24">
-          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.4em] sm:tracking-[0.5em] text-[#5F6B75] mb-6 sm:mb-8 block">The Portfolio</span>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-serif text-[#1A1A1A] mb-10 sm:mb-12 leading-[0.8] italic">Engineering <br /> <span className="not-italic text-opacity-90">Precision.</span></h1>
+    <div className="min-h-screen min-w-0 overflow-x-hidden bg-[#F8F7F4] pt-24 pb-20 sm:pb-32 sm:pt-32 md:pt-40">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
+        <header className="mb-16 min-w-0 sm:mb-24">
+          <span className="mb-6 block text-[10px] font-bold uppercase tracking-[0.4em] text-[#5F6B75] sm:mb-8 sm:text-xs sm:tracking-[0.5em]">The Portfolio</span>
+          <h1 className="mb-10 break-words font-serif text-3xl italic leading-[0.85] text-[#1A1A1A] sm:mb-12 sm:text-4xl md:text-6xl lg:text-8xl xl:text-9xl">
+            Engineering <br /> <span className="not-italic text-opacity-90">Precision.</span>
+          </h1>
           
           <div className="flex flex-wrap gap-3 sm:gap-4 border-b border-[#E5E5E5] pb-8 sm:pb-10">
             {categories.map((cat) => (

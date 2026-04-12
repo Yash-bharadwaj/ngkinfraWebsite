@@ -63,10 +63,10 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F7F4] pb-16 pt-20 sm:pb-24 sm:pt-28 md:pt-36">
+    <div className="min-h-screen min-w-0 overflow-x-hidden bg-[#F8F7F4] pb-16 pt-20 sm:pb-24 sm:pt-28 md:pt-36">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
+          <div className="min-w-0">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#5F6B75]">Contact</p>
             <h1 className="mb-6 font-serif text-3xl text-[#1A1A1A] sm:text-4xl md:text-5xl">
               Start a project
@@ -125,7 +125,7 @@ const Contact: React.FC = () => {
             </ul>
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex min-w-0 w-full flex-col gap-6">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}

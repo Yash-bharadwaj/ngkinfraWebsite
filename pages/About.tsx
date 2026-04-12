@@ -4,12 +4,12 @@ import { motion } from 'framer-motion';
 
 const About: React.FC = () => {
   return (
-    <div className="pt-24 sm:pt-32 pb-16 sm:pb-24">
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mb-20 sm:mb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20 items-center">
-          <div>
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.35em] sm:tracking-[0.4em] text-slate-400 mb-4 sm:mb-6 block">Our Story</span>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-serif text-slate-900 mb-8 sm:mb-12 leading-tight italic">
+    <div className="min-w-0 overflow-x-hidden pt-24 pb-16 sm:pb-24 sm:pt-32">
+      <section className="mx-auto mb-20 max-w-7xl px-4 sm:mb-32 sm:px-6 md:px-12">
+        <div className="grid grid-cols-1 items-center gap-12 sm:gap-20 lg:grid-cols-2">
+          <div className="min-w-0">
+            <span className="mb-4 block text-[10px] font-bold uppercase tracking-[0.35em] text-slate-400 sm:mb-6 sm:text-xs sm:tracking-[0.4em]">Our Story</span>
+            <h1 className="mb-8 break-words font-serif text-3xl italic leading-tight text-slate-900 sm:mb-12 sm:text-4xl md:text-6xl lg:text-8xl">
               Legacy in <br /> <span className="not-italic text-slate-950">the Making.</span>
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-slate-600 font-light leading-relaxed mb-6 sm:mb-8">
@@ -31,11 +31,11 @@ const About: React.FC = () => {
             </div>
           </div>
           
-          <div className="relative">
+          <div className="relative min-w-0 overflow-hidden">
             <img 
               src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?auto=format&fit=crop&q=80&w=800" 
               alt="Leadership" 
-              className="w-full h-auto grayscale shadow-2xl"
+              className="h-auto w-full max-w-full grayscale shadow-2xl"
               onError={(e) => {
                 const t = e.target as HTMLImageElement;
                 if (!t.dataset.fallback) {

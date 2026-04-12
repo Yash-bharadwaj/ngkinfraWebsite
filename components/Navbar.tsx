@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
             : isHome ? 'bg-transparent text-white' : 'bg-[#F8F7F4] text-[#1A1A1A] border-b border-[#E5E5E5]'
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
+        <div className="mx-auto flex min-w-0 max-w-7xl items-center justify-between gap-2">
           <Link
             to="/"
             className="flex min-w-0 flex-1 items-center md:flex-initial md:max-w-[58%] lg:max-w-[min(460px,44%)] xl:max-w-[480px]"

@@ -62,9 +62,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [clearAutoTimer]);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen min-w-0 flex-col overflow-x-hidden">
       <Navbar />
-      <main className="flex-grow">{children}</main>
+      <main className="w-full min-w-0 flex-grow overflow-x-hidden">{children}</main>
       <FloatingSocials leadOpen={leadOpen} onToggleLead={toggleLead} />
       <LeadWhatsAppModal open={leadOpen} onClose={dismissLead} />
       <Footer />

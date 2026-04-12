@@ -100,21 +100,21 @@ const Home: React.FC = () => {
   const marqueeClients = [...CLIENTS, ...CLIENTS];
 
   return (
-    <div ref={scrollRef} className="bg-[#F8F7F4]">
+    <div ref={scrollRef} className="min-w-0 overflow-x-hidden bg-[#F8F7F4]">
       {/* SECTION 1: IMMERSIVE HERO */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden bg-[#1E2B3A] text-white blueprint-grid">
+      <section className="relative flex h-[100dvh] min-h-[100svh] items-center justify-center overflow-hidden bg-[#1E2B3A] text-white blueprint-grid">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#1A1A1A]/40 pointer-events-none" />
         
-        <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl">
+        <div className="relative z-10 mx-auto w-full min-w-0 max-w-5xl px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <span className="text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-[0.35em] sm:tracking-[0.45em] md:tracking-[0.5em] text-[#5F6B75] mb-6 sm:mb-8 block">
+            <span className="mb-6 block text-[10px] font-bold uppercase tracking-[0.35em] text-[#5F6B75] sm:mb-8 sm:tracking-[0.45em] md:text-sm md:tracking-[0.5em]">
               ENGINEERING-FIRST DESIGN & BUILD
             </span>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-[8rem] xl:text-[10rem] font-serif mb-4 sm:mb-5 md:mb-6 leading-none tracking-tight">
+            <h1 className="break-words text-4xl font-serif leading-none tracking-tight sm:text-5xl md:text-7xl lg:text-[8rem] xl:text-[10rem] mb-4 sm:mb-5 md:mb-6">
               NGK Infra.
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif italic font-light text-white/85 mb-8 sm:mb-10 md:mb-12 tracking-wide">
@@ -139,9 +139,9 @@ const Home: React.FC = () => {
       </section>
 
       {/* SECTION 2: STATS STRIP */}
-      <section ref={statsStripRef} className="border-b border-[#E5E5E5] bg-white py-12 sm:py-14">
+      <section ref={statsStripRef} className="overflow-x-hidden border-b border-[#E5E5E5] bg-white py-12 sm:py-14">
         <motion.div
-          className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 sm:gap-12 sm:px-6 md:grid-cols-4 md:px-12"
+          className="mx-auto grid min-w-0 max-w-7xl grid-cols-2 gap-8 px-4 sm:gap-12 sm:px-6 md:grid-cols-4 md:px-12"
           variants={statsStripContainer}
           initial="hidden"
           whileInView="visible"
@@ -169,7 +169,7 @@ const Home: React.FC = () => {
       </section>
 
       {/* SECTION 3: TRUSTED NETWORK + MARQUEE */}
-      <section className="overflow-hidden border-b border-[#E5E5E5] bg-white py-16 sm:py-24">
+      <section className="overflow-x-hidden border-b border-[#E5E5E5] bg-white py-16 sm:py-24">
         <div className="mx-auto mb-12 max-w-7xl px-4 text-center sm:mb-16 sm:px-6 md:px-12">
           <h2 className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-[#5F6B75] sm:mb-5 sm:text-xs">
             Trusted Network
@@ -179,12 +179,12 @@ const Home: React.FC = () => {
           </p>
         </div>
 
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-white to-transparent" />
-          <div className="absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-white to-transparent" />
+        <div className="relative overflow-x-hidden">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent sm:w-24 md:w-32" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent sm:w-24 md:w-32" />
 
           <motion.div
-            className="flex items-center gap-16 whitespace-nowrap py-4 md:gap-24"
+            className="flex w-max max-w-none items-center gap-12 whitespace-nowrap py-4 md:gap-24"
             animate={{ x: [0, -1920] }}
             transition={{
               duration: 50,
@@ -210,13 +210,13 @@ const Home: React.FC = () => {
       </section>
 
       {/* SECTION 4: WHAT WE BUILD */}
-      <section className="py-20 sm:py-32 bg-[#F8F7F4]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 mb-12 sm:mb-20 text-center lg:text-left">
-          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-serif text-[#1A1A1A] mb-4 sm:mb-6">Expertise.</h2>
-          <p className="text-[#5F6B75] text-sm sm:text-base md:text-lg font-light tracking-wide max-w-2xl mx-auto lg:mx-0">A focused portfolio of technical excellence and architectural discipline.</p>
+      <section className="overflow-x-hidden bg-[#F8F7F4] py-20 sm:py-32">
+        <div className="mx-auto mb-12 max-w-7xl px-4 text-center sm:mb-20 sm:px-6 md:px-12 lg:text-left">
+          <h2 className="mb-4 break-words font-serif text-3xl text-[#1A1A1A] sm:mb-6 sm:text-4xl md:text-6xl lg:text-7xl">Expertise.</h2>
+          <p className="mx-auto max-w-2xl text-sm font-light tracking-wide text-[#5F6B75] sm:text-base md:text-lg lg:mx-0">A focused portfolio of technical excellence and architectural discipline.</p>
         </div>
         
-        <div className="flex overflow-x-auto pb-16 px-4 sm:px-6 md:px-12 no-scrollbar gap-6 sm:gap-10 snap-x snap-mandatory scroll-smooth -mx-4 sm:mx-0 pl-4 sm:pl-6 md:pl-12">
+        <div className="flex snap-x snap-mandatory scroll-smooth gap-6 overflow-x-auto pb-16 pl-4 pr-4 no-scrollbar sm:gap-10 sm:px-6 md:px-12 [overscroll-behavior-x:contain]">
           {[
             { 
               title: 'Institutional', 
@@ -272,10 +272,10 @@ const Home: React.FC = () => {
       </section>
 
       {/* SECTION 5: FEATURED PROJECT */}
-      <section className="bg-[#1A1A1A] text-white py-24 sm:py-40 overflow-hidden relative">
+      <section className="relative overflow-x-hidden bg-[#1A1A1A] py-24 text-white sm:py-40">
         <div className="absolute inset-0 blueprint-grid opacity-5" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 sm:gap-24 items-center">
+        <div className="mx-auto max-w-7xl min-w-0 px-4 sm:px-6 md:px-12">
+          <div className="grid grid-cols-1 items-center gap-16 sm:gap-24 lg:grid-cols-2">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -303,8 +303,8 @@ const Home: React.FC = () => {
               </button>
             </motion.div>
             
-            <div className="relative group order-first lg:order-none">
-              <div className="absolute -top-8 sm:-top-12 -left-4 sm:-left-12 w-32 sm:w-48 h-32 sm:h-48 border border-white/5 blueprint-grid z-0" />
+            <div className="group relative order-first min-w-0 overflow-hidden lg:order-none">
+              <div className="absolute -left-2 -top-8 z-0 h-32 w-32 border border-white/5 blueprint-grid sm:-left-8 sm:-top-12 sm:h-48 sm:w-48 md:-left-12" />
               <div className="overflow-hidden shadow-2xl relative z-10">
                 <img 
                   src={hrdcProject?.image || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200"} 
@@ -319,7 +319,7 @@ const Home: React.FC = () => {
                   }}
                 />
               </div>
-              <div className="absolute -bottom-4 right-0 sm:-bottom-8 sm:-right-8 bg-[#F8F7F4] text-[#1A1A1A] p-6 sm:p-10 z-20 shadow-2xl max-w-[85vw] sm:max-w-xs">
+              <div className="absolute -bottom-4 right-0 z-20 max-w-[min(100%,20rem)] bg-[#F8F7F4] p-6 text-[#1A1A1A] shadow-2xl sm:-bottom-8 sm:-right-8 sm:max-w-xs sm:p-10">
                 <span className="block text-lg sm:text-xl md:text-2xl font-serif mb-2 sm:mb-3 leading-tight italic">"Precision in execution."</span>
                 <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-[0.2em] text-[#5F6B75]">- Institutional Delivery Benchmarks</span>
               </div>
@@ -329,10 +329,10 @@ const Home: React.FC = () => {
       </section>
 
       {/* SECTION 6: STRATEGIC CTA */}
-      <section className="py-24 sm:py-48 bg-[#F8F7F4] text-center border-t border-[#E5E5E5]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.4em] sm:tracking-[0.5em] text-[#5F6B75] mb-8 sm:mb-10 block">Consultancy</span>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl font-serif text-[#1A1A1A] mb-12 sm:mb-16 italic tracking-tight leading-none">Build with <br /> Confidence.</h2>
+      <section className="border-t border-[#E5E5E5] bg-[#F8F7F4] py-24 text-center sm:py-48">
+        <div className="mx-auto max-w-4xl min-w-0 px-4 sm:px-6">
+          <span className="mb-8 block text-[10px] font-bold uppercase tracking-[0.4em] text-[#5F6B75] sm:mb-10 sm:text-xs sm:tracking-[0.5em]">Consultancy</span>
+          <h2 className="mb-12 break-words font-serif text-4xl italic leading-none tracking-tight text-[#1A1A1A] sm:mb-16 sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl">Build with <br /> Confidence.</h2>
           <a href="#/contact" className="min-h-[52px] inline-flex items-center justify-center px-10 sm:px-16 py-5 sm:py-7 bg-[#1A1A1A] text-white font-bold uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[10px] sm:text-xs hover:bg-[#1E2B3A] active:scale-[0.98] transition-all shadow-2xl">
             Inquire about a Project
             <ArrowRight className="ml-4 sm:ml-5 w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
