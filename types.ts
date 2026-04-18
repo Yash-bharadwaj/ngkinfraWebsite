@@ -1,3 +1,6 @@
+export interface ClientBrand {
+  name: string;
+}
 
 export type ProjectCategory = 'Institutional' | 'Residential' | 'Healthcare' | 'Infrastructure';
 

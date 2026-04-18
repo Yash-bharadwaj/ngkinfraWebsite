@@ -14,20 +14,21 @@ const Projects: React.FC = () => {
     : PROJECTS.filter(p => p.category === filter);
 
   return (
-    <div className="min-h-screen min-w-0 overflow-x-hidden bg-[#F8F7F4] pt-24 pb-20 sm:pb-32 sm:pt-32 md:pt-40">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
+    <div className="min-h-screen min-w-0 overflow-x-hidden bg-[#F8F7F4] pb-20 pt-24 sm:pb-32 sm:pt-28 md:pt-36">
+      <div className="mx-auto max-w-7xl px-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))] sm:px-6 md:px-12">
         <header className="mb-16 min-w-0 sm:mb-24">
           <span className="mb-6 block text-[10px] font-bold uppercase tracking-[0.4em] text-[#5F6B75] sm:mb-8 sm:text-xs sm:tracking-[0.5em]">The Portfolio</span>
           <h1 className="mb-10 break-words font-serif text-3xl italic leading-[0.85] text-[#1A1A1A] sm:mb-12 sm:text-4xl md:text-6xl lg:text-8xl xl:text-9xl">
             Engineering <br /> <span className="not-italic text-opacity-90">Precision.</span>
           </h1>
           
-          <div className="flex flex-wrap gap-3 sm:gap-4 border-b border-[#E5E5E5] pb-8 sm:pb-10">
+          <div className="grid grid-cols-2 gap-2 border-b border-[#E5E5E5] pb-8 sm:flex sm:flex-wrap sm:gap-3 sm:pb-10 md:gap-4">
             {categories.map((cat) => (
               <button
                 key={cat}
+                type="button"
                 onClick={() => setFilter(cat)}
-                className={`text-[9px] sm:text-[10px] md:text-[11px] uppercase font-bold tracking-[0.25em] sm:tracking-[0.3em] px-5 sm:px-8 py-3 sm:py-4 min-h-[44px] transition-all duration-300 border ${
+                className={`min-h-[48px] w-full px-3 py-2.5 text-[9px] font-bold uppercase tracking-[0.18em] transition-all duration-300 sm:w-auto sm:px-6 sm:py-3 sm:text-[10px] sm:tracking-[0.25em] md:px-8 md:py-4 md:text-[11px] md:tracking-[0.3em] border ${
                   filter === cat 
                     ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow-lg' 
                     : 'bg-white text-[#5F6B75] border-[#E5E5E5] hover:border-[#1A1A1A] hover:text-[#1A1A1A]'
@@ -78,15 +79,16 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
                 
-                <div className="p-6 sm:p-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
-                  <div className="max-w-md">
-                    <h3 className="text-lg sm:text-xl md:text-2xl font-serif text-[#1A1A1A] mb-3 leading-tight">{project.name}</h3>
-                    <div className="h-px w-8 bg-[#3C6E71] mb-4 sm:mb-5" />
-                    <p className="text-[#5F6B75] text-[9px] sm:text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-medium opacity-80">{project.client}</p>
+                <div className="flex flex-col gap-5 p-6 sm:gap-6 sm:p-10 md:flex-row md:items-end md:justify-between">
+                  <div className="min-w-0 max-w-md">
+                    <h3 className="mb-3 font-serif text-lg leading-tight text-[#1A1A1A] sm:text-xl md:text-2xl">{project.name}</h3>
+                    <div className="mb-4 h-px w-8 bg-[#3C6E71] sm:mb-5" />
+                    <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#5F6B75] opacity-80 sm:text-[10px] md:text-[11px]">{project.client}</p>
+                    <p className="mt-4 line-clamp-4 text-sm font-light leading-relaxed text-[#5F6B75]">{project.description}</p>
                   </div>
-                  <div className="md:text-right flex flex-col gap-1 border-l md:border-l-0 md:border-r border-[#E5E5E5] pl-6 md:pl-0 md:pr-6">
-                    <span className="text-[8px] sm:text-[9px] text-[#5F6B75] uppercase tracking-[0.2em] font-bold opacity-50">Site Location</span>
-                    <span className="text-[10px] sm:text-[11px] text-[#1A1A1A] font-medium tracking-wide uppercase">{project.location}</span>
+                  <div className="flex min-w-0 flex-col gap-1 border-t border-[#E5E5E5] pt-4 md:border-l-0 md:border-r md:border-t-0 md:pt-0 md:pl-0 md:pr-6 md:text-right">
+                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#5F6B75] opacity-50 sm:text-[9px]">Site location</span>
+                    <span className="text-[10px] font-medium uppercase tracking-wide text-[#1A1A1A] sm:text-[11px]">{project.location}</span>
                   </div>
                 </div>
               </motion.div>

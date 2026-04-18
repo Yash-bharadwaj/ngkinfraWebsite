@@ -1,59 +1,138 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logoOnDark from '../NGK-LOGO-WHITE.png';
+import {
+  COMPANY_PHONE_DISPLAY,
+  COMPANY_PHONE_TEL,
+  PRIMARY_EMAIL,
+  PRIMARY_EMAIL_HREF,
+  SITE_WEB_URL,
+} from '../constants';
+
+const FOOTER_NAV: { label: string; to: string }[] = [
+  { label: 'Home', to: '/' },
+  { label: 'About', to: '/about' },
+  { label: 'Projects', to: '/projects' },
+  { label: 'Contact', to: '/contact' },
+];
+
+const ADDRESS_LINES = [
+  '# 203, Royal Square, KPHB Phase 5,',
+  'Kukatpally, Near NSL Centrum Mall,',
+  'Hyderabad — 500072',
+] as const;
+
+const SECTORS = ['Institutional', 'Healthcare', 'Residential', 'Infrastructure', 'Commercial'] as const;
+
+const linkClass =
+  'inline-flex min-h-[44px] items-center py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9CA8B3] transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="min-w-0 overflow-x-hidden bg-[#1A1A1A] px-4 py-16 text-[#5F6B75] sm:px-6 sm:py-24 md:px-12">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 sm:gap-20">
-        <div className="col-span-1 md:col-span-1">
-          <Link to="/" className="mb-8 inline-block max-w-full text-white">
-            <img
-              src={logoOnDark}
-              alt="NGK Infra — Construction & Interiors"
-              width={1000}
-              height={300}
-              className="h-10 w-auto max-h-[3.75rem] object-contain object-left sm:h-12 md:h-14 lg:h-16 max-w-full"
-            />
-          </Link>
-          <p className="text-[10px] sm:text-[11px] leading-relaxed mb-8 uppercase tracking-widest font-light">
-            An engineering-led boutique <br /> consultancy redefining the <br /> building experience.
+    <footer className="min-w-0 overflow-x-hidden bg-[#1A1A1A] text-[#9CA8B3]">
+      <div className="mx-auto w-full max-w-7xl px-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))] pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] pt-16 sm:px-6 sm:pb-8 sm:pt-20 md:px-12 md:pt-24">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-14 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-12 xl:gap-x-12">
+          {/* Brand */}
+          <div className="min-w-0 sm:col-span-2 lg:col-span-1">
+            <Link
+              to="/"
+              className="mb-6 inline-block max-w-full rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/50"
+            >
+              <img
+                src={logoOnDark}
+                alt="NGK Infra — civil construction and EPC"
+                width={1000}
+                height={300}
+                className="h-10 w-auto max-w-full object-contain object-left sm:h-11 md:h-12"
+              />
+            </Link>
+            <p className="max-w-xs text-[10px] font-light uppercase leading-relaxed tracking-[0.28em] text-[#7a8794] sm:text-[11px] sm:tracking-[0.32em]">
+              Engineering excellence.
+              <br />
+              Delivering trust.
+            </p>
+            <p className="mt-6 max-w-xs text-xs font-light leading-relaxed text-[#6b7784]">
+              Civil construction and EPC across Telangana and Andhra Pradesh — institutional, healthcare, residential, and
+              selective commercial programmes.
+            </p>
+          </div>
+
+          {/* Navigate */}
+          <div className="min-w-0">
+            <h2 className="mb-5 text-[10px] font-bold uppercase tracking-[0.32em] text-white sm:mb-6">Navigate</h2>
+            <nav aria-label="Footer">
+              <ul className="flex flex-col gap-0.5">
+                {FOOTER_NAV.map((item) => (
+                  <li key={item.to}>
+                    <Link to={item.to} className={linkClass}>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          {/* Office */}
+          <div className="min-w-0">
+            <h2 className="mb-5 text-[10px] font-bold uppercase tracking-[0.32em] text-white sm:mb-6">Office</h2>
+            <ul className="space-y-1 text-sm font-light leading-relaxed">
+              <li>
+                <a href={COMPANY_PHONE_TEL} className="text-[#b8c2cc] transition-colors hover:text-white">
+                  {COMPANY_PHONE_DISPLAY}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={PRIMARY_EMAIL_HREF}
+                  className="break-all text-[#b8c2cc] transition-colors hover:text-white"
+                >
+                  {PRIMARY_EMAIL}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={SITE_WEB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="break-all text-[#b8c2cc] transition-colors hover:text-white"
+                >
+                  www.ngkinfra.co.in
+                </a>
+              </li>
+            </ul>
+            <p className="mt-6 text-xs font-light leading-relaxed text-[#6b7784]">
+              {ADDRESS_LINES.map((line, i) => (
+                <React.Fragment key={line}>
+                  {i > 0 && <br />}
+                  {line}
+                </React.Fragment>
+              ))}
+            </p>
+          </div>
+
+          {/* Sectors */}
+          <div className="min-w-0 sm:col-span-2 lg:col-span-1">
+            <h2 className="mb-5 text-[10px] font-bold uppercase tracking-[0.32em] text-white sm:mb-6">Sectors</h2>
+            <p className="mb-6 text-xs font-light leading-relaxed text-[#6b7784]">
+              {SECTORS.join(' · ')}
+            </p>
+            <Link
+              to="/projects"
+              className="inline-flex min-h-[44px] items-center border border-white/20 px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.22em] text-white transition-colors hover:border-white/40 hover:bg-white/5"
+            >
+              View portfolio
+            </Link>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col items-stretch gap-6 border-t border-white/10 pt-10 sm:mt-16 sm:flex-row sm:items-center sm:justify-between sm:pt-12">
+          <p className="text-center text-[9px] font-bold uppercase tracking-[0.26em] text-white/35 sm:text-left sm:text-[10px] sm:tracking-[0.3em]">
+            © 2026 NGK Infra. All rights reserved.
           </p>
-        </div>
-
-        <div>
-          <h4 className="text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] sm:tracking-[0.3em] mb-8 sm:mb-10">Portfolio</h4>
-          <ul className="space-y-4 sm:space-y-5 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-medium">
-            <li><Link to="/about" className="hover:text-white transition-colors py-2 inline-block min-h-[44px] flex items-center">The Firm</Link></li>
-            <li><Link to="/projects" className="hover:text-white transition-colors py-2 inline-block min-h-[44px] flex items-center">Showcase</Link></li>
-            <li><Link to="/expertise" className="hover:text-white transition-colors py-2 inline-block min-h-[44px] flex items-center">Sectors</Link></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] sm:tracking-[0.3em] mb-8 sm:mb-10">Studio</h4>
-          <ul className="space-y-4 sm:space-y-5 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-medium">
-            <li className="text-white/40">+91 96763 88678</li>
-            <li className="text-white/40">studio@ngkinfra.com</li>
-            <li className="leading-relaxed">Kukatpally, <br /> Hyderabad, TS</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="text-white text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] sm:tracking-[0.3em] mb-8 sm:mb-10">Network</h4>
-          <ul className="space-y-4 sm:space-y-5 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] font-medium">
-            <li><a href="#" className="hover:text-white transition-colors">LinkedIn</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Institutional EPC</a></li>
-            <li><a href="#" className="hover:text-white transition-colors">Sustainability</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div className="max-w-7xl mx-auto mt-16 sm:mt-24 pt-10 sm:pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[8px] sm:text-[9px] uppercase tracking-[0.25em] sm:tracking-[0.3em] font-bold text-center md:text-left">
-        <p className="opacity-30">© 2024 NGK Infra Engineering. All Rights Reserved.</p>
-        <div className="flex space-x-8 sm:space-x-10 mt-2 md:mt-0 opacity-40">
-          <a href="#" className="hover:text-white transition-colors">Privacy</a>
-          <a href="#" className="hover:text-white transition-colors">Terms</a>
+          <p className="text-center text-[9px] font-semibold uppercase tracking-[0.2em] text-white/25 sm:text-right sm:text-[10px]">
+            NICMAR-led delivery · Hyderabad
+          </p>
         </div>
       </div>
     </footer>

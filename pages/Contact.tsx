@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, ChevronDown, Navigation } from 'lucide-react';
-import { WHATSAPP_PHONE_E164 } from '../constants';
+import { MapPin, Phone, Mail, Globe, ChevronDown, Navigation } from 'lucide-react';
+import {
+  COMPANY_PHONE_DISPLAY,
+  COMPANY_PHONE_TEL,
+  PRIMARY_EMAIL,
+  PRIMARY_EMAIL_HREF,
+  SITE_WEB_URL,
+  WHATSAPP_PHONE_E164,
+} from '../constants';
 
-const phoneHref = 'tel:+919676388678';
-const emailHref = 'mailto:projects@ngkinfra.com';
+const phoneHref = COMPANY_PHONE_TEL;
+const emailHref = PRIMARY_EMAIL_HREF;
 
 const OFFICE_ADDRESS_LINES = [
   '# 203, Royal Square, KPHB Phase 5,',
@@ -63,16 +70,16 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen min-w-0 overflow-x-hidden bg-[#F8F7F4] pb-16 pt-20 sm:pb-24 sm:pt-28 md:pt-36">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-12">
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
+    <div className="min-h-screen min-w-0 overflow-x-hidden bg-[#F8F7F4] pb-16 pt-24 sm:pb-24 sm:pt-28 md:pt-32">
+      <div className="mx-auto max-w-7xl px-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))] sm:px-6 md:px-12">
+        <div className="grid min-w-0 grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="min-w-0">
             <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#5F6B75]">Contact</p>
             <h1 className="mb-6 font-serif text-3xl text-[#1A1A1A] sm:text-4xl md:text-5xl">
               Start a project
             </h1>
             <p className="mb-10 max-w-md text-sm leading-relaxed text-[#5F6B75] sm:text-base">
-              New build, renovation, or interiors in Hyderabad and beyond — share your scope and we’ll get back to you.
+              Civil construction, EPC, and design-build across Telangana and Andhra Pradesh — share your scope and timeline and we will respond from the office.
             </p>
 
             <ul className="space-y-8">
@@ -103,7 +110,7 @@ const Contact: React.FC = () => {
                     href={phoneHref}
                     className="text-sm text-[#1E2B3A] underline-offset-2 hover:underline"
                   >
-                    +91 96763 88678
+                    {COMPANY_PHONE_DISPLAY}
                   </a>
                 </div>
               </li>
@@ -118,7 +125,24 @@ const Contact: React.FC = () => {
                     href={emailHref}
                     className="text-sm text-[#1E2B3A] underline-offset-2 hover:underline break-all"
                   >
-                    projects@ngkinfra.com
+                    {PRIMARY_EMAIL}
+                  </a>
+                </div>
+              </li>
+
+              <li className="flex gap-4">
+                <div className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center border border-[#E5E5E5] bg-white">
+                  <Globe className="h-4 w-4 text-[#5F6B75]" aria-hidden />
+                </div>
+                <div>
+                  <p className="mb-1 text-xs font-semibold text-[#1A1A1A]">Website</p>
+                  <a
+                    href={SITE_WEB_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-[#1E2B3A] underline-offset-2 hover:underline break-all"
+                  >
+                    www.ngkinfra.co.in
                   </a>
                 </div>
               </li>
@@ -286,7 +310,7 @@ const Contact: React.FC = () => {
       </div>
 
       <div className="mt-16 min-h-[14rem] w-full border-y border-[#E5E5E5] bg-white sm:mt-24 sm:min-h-[16rem]">
-        <div className="flex h-full min-h-[inherit] items-center justify-center px-4 py-10">
+        <div className="flex h-full min-h-[inherit] items-center justify-center px-[max(1rem,env(safe-area-inset-left,0px))] py-10 pr-[max(1rem,env(safe-area-inset-right,0px))]">
           <div className="flex max-w-lg flex-col items-center text-center">
             <MapPin className="mb-3 h-8 w-8 text-[#5F6B75]" aria-hidden />
             <p className="text-sm font-medium text-[#1A1A1A]">Office location</p>

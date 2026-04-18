@@ -64,7 +64,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex min-h-screen min-w-0 flex-col overflow-x-hidden">
       <Navbar />
-      <main className="w-full min-w-0 flex-grow overflow-x-hidden">{children}</main>
+      <main className="w-full min-w-0 flex-grow overflow-x-hidden pb-[calc(6rem+env(safe-area-inset-bottom,0px))] md:pb-10">
+        {children}
+      </main>
       <FloatingSocials leadOpen={leadOpen} onToggleLead={toggleLead} />
       <LeadWhatsAppModal open={leadOpen} onClose={dismissLead} />
       <Footer />

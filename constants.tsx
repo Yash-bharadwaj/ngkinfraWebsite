@@ -1,16 +1,9 @@
-
-import React from 'react';
-import { 
-  ShieldCheck, 
-  Target, 
-  Cpu, 
-  Award, 
-  MessageSquare, 
-  Zap, 
-  BarChart3, 
-  Leaf 
-} from 'lucide-react';
-import { Project, Attribute, ProcessStep } from './types';
+import { Project, Attribute, ProcessStep, ClientBrand } from './types';
+import {
+  PROJECT_IMAGE_HRDC,
+  PROJECT_IMAGE_LAKEWOOD,
+  PROJECT_IMAGE_SANCTA_MARIA
+} from './projectImages';
 
 export const COLORS = {
   warmOffWhite: '#F8F7F4',
@@ -21,6 +14,15 @@ export const COLORS = {
   divider: '#E5E5E5'
 };
 
+/** Primary business email (site-wide). */
+export const PRIMARY_EMAIL = 'Shiva@ngkinfra.co.in';
+export const PRIMARY_EMAIL_HREF = `mailto:${PRIMARY_EMAIL}`;
+export const SITE_WEB_URL = 'https://www.ngkinfra.co.in';
+
+/** Office phone — display and tel: href */
+export const COMPANY_PHONE_DISPLAY = '+91 96763 88678';
+export const COMPANY_PHONE_TEL = 'tel:+919676388678';
+
 /** +91 96763 88678 — digits only for wa.me */
 export const WHATSAPP_PHONE_E164 = '919676388678';
 export const WHATSAPP_CHAT_URL = `https://wa.me/${WHATSAPP_PHONE_E164}`;
@@ -29,18 +31,19 @@ export const PROJECTS: Project[] = [
   {
     id: 'hrdc-uoh',
     name: 'Human Resources Development Centre (HRDC)',
-    client: 'University of Hyderabad (CPWD)',
+    client: 'N. Nageswara Rao & Co with CPWD — University of Hyderabad',
     location: 'Gachibowli, Hyderabad',
     category: 'Institutional',
     status: 'Completed',
-    description: 'EPC basis construction of HRDC project including Civil works, internal water supply, sanitary installations, sewerage, and drainage.',
-    scope: ['Civil Works', 'Internal MEP', 'Site Development', 'Drainage Systems'],
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200',
+    description:
+      'Full EPC delivery for the HRDC block at the University of Hyderabad: civil works, internal water supply and sanitary installations, sewerage, drainage, and site development — roughly 42,000 sq. ft. of built-up area coordinated end-to-end.',
+    scope: ['Civil & RCC', 'Water supply & sanitation', 'Sewerage & drainage', 'Site development'],
+    image: PROJECT_IMAGE_HRDC,
     year: '2023',
     details: {
-      epc: '100% EPC Delivery Model',
-      civil: 'Complete structural and finishing works',
-      internalSystems: 'Advanced ventilation and water management'
+      epc: 'Design & build EPC',
+      civil: 'Structure through finishes',
+      internalSystems: 'Wet services and external works integrated with civil delivery'
     }
   },
   {
@@ -50,30 +53,33 @@ export const PROJECTS: Project[] = [
     location: 'Gandipet, Hyderabad',
     category: 'Residential',
     status: 'Ongoing',
-    description: 'Construction of 6 high-end luxury villas, each spanning a massive 11,000 sft of built-up area.',
-    scope: ['Premium Finishes', 'Structural Engineering', 'Landscape Integration'],
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200'
+    description:
+      'Six premium villas for a combined programme of about 66,000 sq. ft., each villa designed to a high-end residential standard with coordinated structure, envelope, and interior-ready shell delivery.',
+    scope: ['Luxury villas', 'Structural quality', 'Finishes coordination'],
+    image: PROJECT_IMAGE_LAKEWOOD
   },
   {
     id: 'sancta-maria',
     name: 'Sancta Maria International School',
-    client: 'Trisha Infracon Projects Ltd',
+    client: 'Trisha Infracon Projects (P) Ltd',
     location: 'Shamshabad, Hyderabad',
     category: 'Institutional',
     status: 'Ongoing',
-    description: 'Infrastructure development for a premier international educational institution.',
-    scope: ['Educational Spaces', 'Safety Systems', 'Large-scale Infrastructure'],
-    image: 'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=1200'
+    description:
+      'Large-format institutional build for an international school — classrooms, circulation, and services planned for heavy daily use, with safety and durability treated as non-negotiables across roughly 94,000 sq. ft.',
+    scope: ['Academic blocks', 'Safety & compliance', 'High-traffic educational spaces'],
+    image: PROJECT_IMAGE_SANCTA_MARIA
   },
   {
     id: 'railway-building',
-    name: 'Railway Buildings (Nekonda-Warangal)',
+    name: 'Railway buildings — Nekonda to Warangal (3rd line)',
     client: 'Zetwerk Manufacturing Private Limited',
     location: 'Warangal, Telangana',
     category: 'Infrastructure',
     status: 'Ongoing',
-    description: 'Construction of essential railway buildings along the 3rd line for strategic logistics.',
-    scope: ['Railway Infrastructure', 'Strategic Civil Works', 'Structural Rigidity'],
+    description:
+      'Railway-related buildings along the third line between Nekonda and Warangal, executed to the tighter tolerances and coordination rhythms typical of transport infrastructure work alongside a manufacturing-led client team.',
+    scope: ['Rail-adjacent civil buildings', 'Coordinated handoffs', 'Site execution discipline'],
     image: 'https://images.unsplash.com/photo-1449156003053-c2d8244fe3ba?auto=format&fit=crop&q=80&w=1200'
   }
 ];
@@ -81,70 +87,71 @@ export const PROJECTS: Project[] = [
 export const ATTRIBUTES: Attribute[] = [
   {
     id: 1,
-    title: 'Ownership of Outcomes',
-    description: 'We don’t just execute; we take responsibility for the final success of the project.',
+    title: 'Ownership of outcomes',
+    description: 'We stand behind delivery — not just activity on site, but the result you can occupy and operate.',
     icon: 'ShieldCheck'
   },
   {
     id: 2,
-    title: 'Early Stage Clarity',
-    description: 'Resolving complexities before they become constraints through rigorous planning.',
+    title: 'Early clarity',
+    description: 'Scope, interfaces, and risk are surfaced early so execution stays predictable.',
     icon: 'Target'
   },
   {
     id: 3,
-    title: 'Engineering-Driven Leadership',
-    description: 'Led by NICMAR alumni, bringing deep technical discipline to every site.',
+    title: 'Engineering-led leadership',
+    description: 'NICMAR-trained leadership keeps technical decisions and site reality aligned.',
     icon: 'Cpu'
   },
   {
     id: 4,
-    title: 'Execution Excellence',
-    description: 'Precision in complex and custom projects where standards are non-negotiable.',
+    title: 'Execution discipline',
+    description: 'Structured supervision, inspections, and handover standards on every project.',
     icon: 'Award'
   },
   {
     id: 5,
-    title: 'Communication That Builds Trust',
-    description: 'Transparent reporting and proactive issue resolution at every milestone.',
+    title: 'Transparent communication',
+    description: 'Plain-spoken reporting and milestone tracking stakeholders can rely on.',
     icon: 'MessageSquare'
   },
   {
     id: 6,
-    title: 'Speed with Quality',
-    description: 'Optimized resource allocation to ensure timelines are met without cutting corners.',
+    title: 'Speed without shortcuts',
+    description: 'Lean resourcing and sequencing that protect quality and safety.',
     icon: 'Zap'
   },
   {
     id: 7,
-    title: 'Technology Enabled Tracking',
-    description: 'Real-time monitoring and reporting using modern project management software.',
+    title: 'Technology-enabled control',
+    description: 'Digital tools for quantities, cost visibility, and progress — including BIM where the job demands it.',
     icon: 'BarChart3'
   },
   {
     id: 8,
-    title: 'Sustainability as Core Practice',
-    description: 'Minimizing environmental impact through efficient material use and design.',
+    title: 'Sustainability in practice',
+    description: 'Material efficiency, waste discipline, and sensible energy choices baked into execution.',
     icon: 'Leaf'
   }
 ];
 
 export const PROCESS_STEPS: ProcessStep[] = [
-  { id: 1, title: 'Concept Alignment', description: 'Deep dive into client vision and site feasibility.' },
-  { id: 2, title: 'Detailed Engineering', description: 'Rigorous technical planning and blueprint finalization.' },
-  { id: 3, title: 'Resource Optimization', description: 'Strategic procurement and talent allocation.' },
-  { id: 4, title: 'Controlled Execution', description: 'Precision building with strict quality checkpoints.' },
-  { id: 5, title: 'Transparent Tracking', description: 'Regular updates and data-driven progress monitoring.' },
-  { id: 6, title: 'Timely Handover', description: 'Seamless delivery meeting all technical benchmarks.' }
+  { id: 1, title: 'Pre-construction planning', description: 'Scope, budget, resources, and risk mapped before mobilisation.' },
+  { id: 2, title: 'Engineering & procurement', description: 'Drawings, specifications, and vendor packages aligned to site reality.' },
+  { id: 3, title: 'Controlled execution', description: 'Daily site rhythm, labour and vendor coordination, timeline adherence.' },
+  { id: 4, title: 'Monitoring & control', description: 'Milestone tracking, inspections, and course corrections in real time.' },
+  { id: 5, title: 'Quality & safety gates', description: 'Material certification, NBC-oriented checks, and zero-harm culture on site.' },
+  { id: 6, title: 'Delivery & handover', description: 'Snag-led closure and documentation you can archive with confidence.' }
 ];
 
-export const CLIENTS = [
-  'Central Public Works Department (CPWD)',
-  'N. Nageswara Rao & Co',
-  'Rainbow Children’s Hospital',
-  'BirthRight by Rainbow',
-  'Sancta Maria International School',
-  'Trisha Infracon Projects Pvt Ltd',
-  'Saridena Constructions Pvt Ltd',
-  'Zetwerk Manufacturing Private Limited'
+/** Partner / client names (shown as text on the site). */
+export const CLIENT_BRANDS: ClientBrand[] = [
+  { name: 'Central Public Works Department (CPWD)' },
+  { name: 'N. Nageswara Rao & Co' },
+  { name: "Rainbow Children's Hospital" },
+  { name: 'BirthRight by Rainbow' },
+  { name: 'Sancta Maria International School' },
+  { name: 'Trisha Infracon Projects (P) Ltd' },
+  { name: 'Saridena Constructions' },
+  { name: 'Zetwerk' }
 ];

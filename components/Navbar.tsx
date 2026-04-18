@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 px-3 py-2 sm:px-4 sm:py-2 md:px-8 md:py-2.5 lg:px-10 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-2 pl-[max(0.75rem,env(safe-area-inset-left,0px))] pr-[max(0.75rem,env(safe-area-inset-right,0px))] sm:py-2 sm:pl-4 sm:pr-4 md:px-8 md:py-2.5 lg:px-10 ${
           isScrolled
             ? 'bg-[#F8F7F4]/95 backdrop-blur-lg shadow-sm border-b border-[#E5E5E5]'
             : isHome ? 'bg-transparent text-white' : 'bg-[#F8F7F4] text-[#1A1A1A] border-b border-[#E5E5E5]'
@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
           >
             <img
               src={darkNav ? logoColor : logoOnDark}
-              alt="NGK Infra — Construction & Interiors"
+              alt="NGK Infra — civil construction and EPC"
               width={1000}
               height={300}
               className="h-9 w-auto object-contain object-left sm:h-10 md:h-11 lg:h-12 xl:h-14 max-w-full"
@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
             type="button"
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
-            className="md:hidden flex shrink-0 items-center justify-center w-9 h-9 -mr-0.5 touch-manipulation active:scale-95 transition-transform"
+            className="md:hidden flex min-h-[44px] min-w-[44px] shrink-0 touch-manipulation items-center justify-center active:scale-95 transition-transform"
             onClick={() => setMobileOpen((o) => !o)}
           >
             {mobileOpen ? (
@@ -124,7 +124,7 @@ const Navbar: React.FC = () => {
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation"
-              className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-[min(320px,85vw)] bg-[#F8F7F4] shadow-xl md:hidden flex flex-col"
+              className="fixed top-0 right-0 bottom-0 z-50 flex w-full max-w-[min(320px,85vw)] flex-col bg-[#F8F7F4] pb-[env(safe-area-inset-bottom,0px)] pt-[env(safe-area-inset-top,0px)] shadow-xl md:hidden"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -135,7 +135,7 @@ const Navbar: React.FC = () => {
                 <button
                   type="button"
                   aria-label="Close menu"
-                  className="w-10 h-10 flex items-center justify-center rounded-md text-[#1A1A1A] hover:bg-[#E5E5E5] active:scale-95"
+                  className="flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md text-[#1A1A1A] hover:bg-[#E5E5E5] active:scale-95"
                   onClick={() => setMobileOpen(false)}
                 >
                   <X className="w-5 h-5" strokeWidth={2} />

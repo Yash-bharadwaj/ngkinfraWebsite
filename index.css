@@ -1,0 +1,18 @@
+@keyframes ngk-logo-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ngk-logo-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: ngk-logo-marquee 52s linear infinite;
+}
+
+.ngk-logo-marquee-track:hover {
+  animation-play-state: paused;
+}
