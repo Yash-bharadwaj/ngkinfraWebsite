@@ -1,15 +1,15 @@
 
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 
-// Scroll to top on route change
+/** HashRouter: `window.location.pathname` does not change — use router `pathname` (e.g. /about for #/about). */
 const ScrollToTop = () => {
-  const { pathname } = window.location;
+  const { pathname } = useLocation();
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);

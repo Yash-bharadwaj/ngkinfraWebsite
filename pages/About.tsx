@@ -22,8 +22,9 @@ const About: React.FC = () => {
             <span className="mb-4 block text-[10px] font-bold uppercase tracking-[0.35em] text-slate-400 sm:mb-6 sm:text-xs sm:tracking-[0.4em]">
               About NGK Infra
             </span>
-            <h1 className="mb-8 break-words font-serif text-3xl italic leading-tight text-slate-900 sm:mb-12 sm:text-4xl md:text-6xl lg:text-8xl">
-              Clarity in <br /> <span className="not-italic text-slate-950">construction.</span>
+            <h1 className="mb-8 text-balance break-words font-serif text-2xl italic leading-[1.1] tracking-tight text-slate-900 sm:mb-12 sm:text-3xl sm:leading-tight md:text-5xl lg:text-7xl">
+              <span className="italic">Clarity in </span>
+              <span className="not-italic text-slate-950">construction</span>
             </h1>
             <p className="mb-6 text-sm font-light leading-relaxed text-slate-600 sm:mb-8 sm:text-base md:text-lg">
               Founded in Hyderabad in 2023, NGK Infra is a civil construction and EPC contractor focused on the projects that shape communities — schools, hospitals, homes, and selective commercial work across Telangana and Andhra Pradesh.

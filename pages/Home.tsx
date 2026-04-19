@@ -127,7 +127,10 @@ const Home: React.FC = () => {
             <h1 className="mt-5 break-words font-serif text-4xl leading-[0.95] tracking-tight sm:mt-6 sm:text-5xl md:mt-7 md:text-7xl lg:text-[8rem] xl:text-[9.5rem]">
               NGK Infra.
             </h1>
-            <p className="mt-4 max-w-xl font-serif text-lg italic font-light leading-snug tracking-wide text-white/90 sm:mt-5 sm:text-xl md:mt-6 md:max-w-2xl md:text-2xl lg:text-3xl">
+            <p className="mt-3 max-w-2xl font-sans text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80 sm:mt-4 sm:text-xs sm:tracking-[0.34em] md:text-sm md:tracking-[0.38em]">
+              NGK Construction &amp; Interiors
+            </p>
+            <p className="mt-5 max-w-xl font-serif text-lg italic font-light leading-snug tracking-wide text-white/90 sm:mt-6 sm:text-xl md:mt-7 md:max-w-2xl md:text-2xl lg:text-3xl">
               Engineering excellence. Delivering trust.
             </p>
             <p className="mt-5 max-w-2xl text-sm font-light leading-relaxed tracking-wide text-white/75 sm:mt-6 sm:text-base md:mt-7 md:text-lg">
