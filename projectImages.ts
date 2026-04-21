@@ -9,7 +9,6 @@ import imgStudentsHousing from './images/Students Housing.jpeg';
 /** Project cards (Projects page / featured) */
 export const PROJECT_IMAGE_HRDC = imgHrdc;
 export const PROJECT_IMAGE_LAKEWOOD = imgLakewood;
-export const PROJECT_IMAGE_SANCTA_MARIA = imgSancta;
 
 /** Home “Expertise” carousel — real site & programme photography */
 export const HOME_EXPERTISE_INSTITUTIONAL = imgSancta;

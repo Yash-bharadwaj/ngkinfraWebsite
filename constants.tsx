@@ -1,9 +1,5 @@
 import { Project, Attribute, ProcessStep, ClientBrand } from './types';
-import {
-  PROJECT_IMAGE_HRDC,
-  PROJECT_IMAGE_LAKEWOOD,
-  PROJECT_IMAGE_SANCTA_MARIA
-} from './projectImages';
+import { PROJECT_IMAGE_HRDC, PROJECT_IMAGE_LAKEWOOD } from './projectImages';
 
 export const COLORS = {
   warmOffWhite: '#F8F7F4',
@@ -68,7 +64,7 @@ export const PROJECTS: Project[] = [
     description:
       'Large-format institutional build for an international school — classrooms, circulation, and services planned for heavy daily use, with safety and durability treated as non-negotiables across roughly 94,000 sq. ft.',
     scope: ['Academic blocks', 'Safety & compliance', 'High-traffic educational spaces'],
-    image: PROJECT_IMAGE_SANCTA_MARIA
+    image: '/sanctamaria3.jpeg'
   },
   {
     id: 'railway-building',
