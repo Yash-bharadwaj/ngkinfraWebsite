@@ -210,7 +210,7 @@ const Home: React.FC = () => {
           </p>
         </div>
         
-        <div className="flex snap-x snap-mandatory scroll-smooth gap-5 overflow-x-auto pb-16 ps-[max(1rem,env(safe-area-inset-left,0px))] pe-[max(1rem,env(safe-area-inset-right,0px))] no-scrollbar sm:gap-10 sm:ps-6 sm:pe-6 md:ps-12 md:pe-12 [overscroll-behavior-x:contain]">
+        <div className="flex snap-x snap-mandatory scroll-smooth gap-4 overflow-x-auto pb-14 ps-[max(1rem,env(safe-area-inset-left,0px))] pe-[max(1rem,env(safe-area-inset-right,0px))] no-scrollbar sm:gap-10 sm:pb-16 sm:ps-6 sm:pe-6 md:ps-12 md:pe-12 [overscroll-behavior-x:contain]">
           {[
             { 
               title: 'Institutional', 
@@ -239,11 +239,11 @@ const Home: React.FC = () => {
           ].map((panel, i) => (
             <motion.div 
               key={i} 
-              className="min-w-[280px] sm:min-w-[320px] md:min-w-[480px] bg-white group cursor-pointer relative shadow-sm border border-[#E5E5E5]/50 snap-center flex-shrink-0"
+              className="group relative w-[84vw] max-w-[84vw] flex-shrink-0 snap-start border border-[#E5E5E5]/70 bg-white shadow-sm sm:min-w-[320px] sm:max-w-none md:min-w-[480px]"
               whileHover={{ y: -12 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              <div className="h-56 sm:h-72 overflow-hidden relative bg-[#E5E5E5]">
+              <div className="relative h-48 overflow-hidden bg-[#E5E5E5] sm:h-72">
                 <img 
                   src={panel.img} 
                   alt={panel.title} 
@@ -258,11 +258,11 @@ const Home: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-[#1A1A1A]/10 group-hover:bg-transparent transition-all" />
               </div>
-              <div className="p-6 sm:p-10">
+              <div className="flex min-h-[16.25rem] flex-col p-5 sm:min-h-0 sm:p-10">
                 <div className={`w-8 h-px ${panel.accent} mb-4 sm:mb-6 transition-all group-hover:w-16`} />
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-serif mb-3 sm:mb-5 text-[#1A1A1A]">{panel.title}</h3>
-                <p className="text-[#5F6B75] text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8 font-light tracking-wide">{panel.desc}</p>
-                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#1A1A1A] flex items-center group">
+                <h3 className="mb-3 font-serif text-xl text-[#1A1A1A] sm:mb-5 sm:text-2xl md:text-3xl">{panel.title}</h3>
+                <p className="mb-6 line-clamp-4 text-xs font-light leading-relaxed tracking-wide text-[#5F6B75] sm:mb-8 sm:line-clamp-none sm:text-sm">{panel.desc}</p>
+                <span className="mt-auto inline-flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-[#1A1A1A] sm:text-xs">
                   Explore Sector <ArrowRight className="ml-2 w-3 h-3 group-hover:translate-x-1 transition-transform" />
                 </span>
               </div>
