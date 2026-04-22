@@ -1,14 +1,16 @@
-import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { ArrowRight, Quote } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useInView } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import { PROJECTS } from '../constants';
 import ClientLogoMarquee from '../components/ClientLogoMarquee';
-import heroVideo from '../images/Interior.mp4';
 import {
+  ABOUT_GALLERY_IMAGES,
   HOME_EXPERTISE_COMMERCIAL,
   HOME_EXPERTISE_HEALTHCARE,
   HOME_EXPERTISE_INSTITUTIONAL,
   HOME_EXPERTISE_RESIDENTIAL,
+  PROJECT_IMAGE_HRDC,
+  PROJECT_IMAGE_LAKEWOOD,
 } from '../projectImages';
 
 type StatDef = { label: string; accent: string; kind: 'text'; value: string };
@@ -20,40 +22,15 @@ const STATS_DATA: StatDef[] = [
   { label: 'Operating geography', accent: 'text-[#5F6B75]', value: 'TG & AP' },
 ];
 
-const CLIENT_REVIEWS: { quote: string; role: string; context: string }[] = [
-  {
-    quote:
-      'Progress and cost were reported plainly every week — we always knew where we stood on programme risk, not just activity on site.',
-    role: 'Programme manager',
-    context: 'Institutional EPC — Hyderabad',
-  },
-  {
-    quote:
-      'MEP interfaces and finishing packages were coordinated before they turned into claims. That discipline saved us months of rework.',
-    role: 'Technical consultant',
-    context: 'Design-build coordination',
-  },
-  {
-    quote:
-      'Handover packs matched how the building actually operates — test records, as-built clarity, and a walkthrough that our facilities team could use from day one.',
-    role: 'Facilities lead',
-    context: 'Ongoing campus project',
-  },
-];
 
-const CLIENT_REVIEW_OUTCOMES: { title: string; body: string }[] = [
-  {
-    title: 'Programme clarity',
-    body: 'Milestones tied to site readiness — not optimistic curves disconnected from labour and material reality.',
-  },
-  {
-    title: 'Site discipline',
-    body: 'Logistics, housekeeping, and safety routines that clients and consultants can audit without surprises.',
-  },
-  {
-    title: 'Accountable closure',
-    body: 'Snagging, testing, and documentation structured into the delivery path so commissioning is orderly.',
-  },
+const HERO_CAROUSEL_IMAGES: { src: string; alt: string }[] = [
+  { src: PROJECT_IMAGE_HRDC, alt: 'HRDC institutional project exterior' },
+  { src: PROJECT_IMAGE_LAKEWOOD, alt: 'Lakewood villas construction progress' },
+  { src: HOME_EXPERTISE_COMMERCIAL, alt: 'Commercial block structural progress' },
+  { src: '/sanctamaria1.jpeg', alt: 'Sancta Maria campus site view' },
+  { src: '/sanctamaria2.jpeg', alt: 'Sancta Maria school construction view' },
+  { src: '/sanctamaria3.jpeg', alt: 'Sancta Maria international school project' },
+  ...ABOUT_GALLERY_IMAGES,
 ];
 
 const StatAnimatedValue: React.FC<{
@@ -91,28 +68,58 @@ const Home: React.FC = () => {
   const scrollRef = useRef(null);
   const statsStripRef = useRef<HTMLDivElement>(null);
   const statsInView = useInView(statsStripRef, { once: true, amount: 0.35 });
+  const [heroSlide, setHeroSlide] = useState(0);
 
   // Reference the specific project for the showcase
   const hrdcProject = PROJECTS.find(p => p.id === 'hrdc-uoh');
+
+  useEffect(() => {
+    if (HERO_CAROUSEL_IMAGES.length <= 1) return;
+    const timer = window.setInterval(() => {
+      setHeroSlide((prev) => (prev + 1) % HERO_CAROUSEL_IMAGES.length);
+    }, 4200);
+    return () => window.clearInterval(timer);
+  }, []);
 
   return (
     <div ref={scrollRef} className="min-w-0 overflow-x-hidden bg-[#F8F7F4]">
       {/* SECTION 1: IMMERSIVE HERO */}
       <section className="relative flex h-[100dvh] min-h-[100svh] items-center justify-center overflow-hidden bg-[#1E2B3A] text-white">
         <div className="pointer-events-none absolute inset-0 z-0">
-          <video
-            className="absolute left-1/2 top-1/2 min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 object-cover"
-            src={heroVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            aria-hidden="true"
-          />
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={HERO_CAROUSEL_IMAGES[heroSlide]?.src || 'hero-slide'}
+              src={HERO_CAROUSEL_IMAGES[heroSlide]?.src}
+              alt={HERO_CAROUSEL_IMAGES[heroSlide]?.alt || 'NGK Infra project'}
+              className="absolute inset-0 h-full w-full object-cover object-center"
+              initial={{ opacity: 0, x: 120 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -120 }}
+              transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+              loading="eager"
+              decoding="async"
+              onError={(e) => {
+                const t = e.target as HTMLImageElement;
+                if (!t.dataset.fallback) {
+                  t.dataset.fallback = '1';
+                  t.src = PROJECT_IMAGE_HRDC;
+                }
+              }}
+            />
+          </AnimatePresence>
         </div>
         <div className="pointer-events-none absolute inset-0 z-[1] bg-[#1E2B3A]/55" />
         <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-[#0f1419]/80 via-[#1a2330]/35 to-[#0a0d12]/90" />
+        <div className="pointer-events-none absolute bottom-[max(1.25rem,env(safe-area-inset-bottom,0px)+0.5rem)] right-[max(1rem,env(safe-area-inset-right,0px))] z-[2] flex items-center gap-1.5 sm:gap-2">
+          {HERO_CAROUSEL_IMAGES.map((item, i) => (
+            <span
+              key={item.src + i}
+              className={`block h-1.5 rounded-full transition-all duration-500 ${
+                i === heroSlide ? 'w-7 bg-white/95 sm:w-8' : 'w-2 bg-white/45'
+              }`}
+            />
+          ))}
+        </div>
 
         <div className="relative z-10 mx-auto w-full min-w-0 max-w-5xl px-[max(1.25rem,env(safe-area-inset-left,0px))] pr-[max(1.25rem,env(safe-area-inset-right,0px))] pt-[env(safe-area-inset-top,0px)] sm:px-8 md:px-10">
           <motion.div
@@ -125,10 +132,10 @@ const Home: React.FC = () => {
               Civil construction · EPC · Design & build
             </span>
             <h1 className="mt-5 break-words font-serif text-4xl leading-[0.95] tracking-tight sm:mt-6 sm:text-5xl md:mt-7 md:text-7xl lg:text-[8rem] xl:text-[9.5rem]">
-              NGK Infra.
+              NGK.
             </h1>
             <p className="mt-3 max-w-2xl font-sans text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80 sm:mt-4 sm:text-xs sm:tracking-[0.34em] md:text-sm md:tracking-[0.38em]">
-              NGK Construction &amp; Interiors
+              Construction &amp; Interiors
             </p>
             <p className="mt-5 max-w-xl font-serif text-lg italic font-light leading-snug tracking-wide text-white/90 sm:mt-6 sm:text-xl md:mt-7 md:max-w-2xl md:text-2xl lg:text-3xl">
               Engineering excellence. Delivering trust.
@@ -140,9 +147,6 @@ const Home: React.FC = () => {
               <strong className="font-medium text-white/90">premium residential</strong>, and select{' '}
               <strong className="font-medium text-white/90">commercial</strong> programmes — with EPC discipline, transparent
               controls, and safety-first sites.
-            </p>
-            <p className="mt-6 text-lg font-bold uppercase tracking-[0.18em] text-white sm:mt-7 sm:text-xl md:mt-8 md:text-2xl lg:text-3xl lg:tracking-[0.22em]">
-              NICMAR-led delivery
             </p>
           </motion.div>
         </div>
@@ -200,80 +204,6 @@ const Home: React.FC = () => {
         <ClientLogoMarquee />
       </section>
 
-      {/* SECTION 3b: CLIENT REVIEWS + OUTCOMES */}
-      <section className="overflow-x-hidden border-b border-[#E5E5E5] bg-[#FAFAF8] py-16 sm:py-24">
-        <div className="mx-auto max-w-7xl px-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))] sm:px-6 md:px-12">
-          <div className="mx-auto mb-12 max-w-2xl text-center sm:mb-16">
-            <span className="mb-4 block text-[10px] font-bold uppercase tracking-[0.3em] text-[#5F6B75] sm:text-xs">
-              Client perspectives
-            </span>
-            <h2 className="mb-4 break-words font-serif text-2xl leading-tight text-[#1A1A1A] sm:text-3xl md:text-4xl lg:text-5xl">
-              Voices from <span className="italic">the field.</span>
-            </h2>
-            <p className="text-sm font-light leading-relaxed text-[#5F6B75] sm:text-base">
-              Anonymous feedback from client-side teams we have worked with — focused on how delivery actually felt on their side of the table.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
-            {CLIENT_REVIEWS.map((item, i) => (
-              <motion.article
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.25 }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="flex min-h-full flex-col border border-[#E5E5E5] bg-white p-6 shadow-sm sm:p-8"
-              >
-                <Quote className="h-8 w-8 shrink-0 text-[#3C6E71]/35" aria-hidden strokeWidth={1.25} />
-                <blockquote className="mt-5 flex-1 font-serif text-base italic leading-relaxed text-[#1A1A1A] sm:text-lg">
-                  “{item.quote}”
-                </blockquote>
-                <footer className="mt-8 border-t border-[#E5E5E5] pt-6">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#1A1A1A]">{item.role}</p>
-                  <p className="mt-1.5 text-[9px] font-medium uppercase tracking-[0.18em] text-[#5F6B75]">{item.context}</p>
-                </footer>
-              </motion.article>
-            ))}
-          </div>
-
-          <div className="mx-auto mt-14 max-w-5xl border-t border-[#E5E5E5] pt-12 sm:mt-20 sm:pt-16">
-            <p className="mb-8 text-center text-[10px] font-bold uppercase tracking-[0.28em] text-[#5F6B75] sm:mb-10 sm:tracking-[0.32em]">
-              What clients emphasise
-            </p>
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-6 md:gap-10">
-              {CLIENT_REVIEW_OUTCOMES.map((block, i) => (
-                <motion.div
-                  key={block.title}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.45, delay: i * 0.06 }}
-                  className="text-center sm:text-left"
-                >
-                  <div className="mx-auto mb-3 h-px w-10 bg-[#3C6E71] sm:mx-0" />
-                  <h3 className="mb-2 font-serif text-lg text-[#1A1A1A] sm:text-xl">{block.title}</h3>
-                  <p className="text-xs font-light leading-relaxed text-[#5F6B75] sm:text-sm">{block.body}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6 }}
-            className="mx-auto mt-14 max-w-3xl rounded-sm border border-[#E5E5E5] bg-white px-5 py-8 text-center sm:mt-16 sm:px-10 sm:py-10"
-          >
-            <p className="font-serif text-lg italic leading-snug text-[#1A1A1A] sm:text-xl md:text-2xl">
-              “We optimise for the handover you will remember — orderly, documented, and aligned with how your team will run the asset.”
-            </p>
-            <p className="mt-5 text-[9px] font-bold uppercase tracking-[0.25em] text-[#5F6B75]">NGK Infra — delivery principle</p>
-          </motion.div>
-        </div>
-      </section>
-
       {/* SECTION 4: WHAT WE BUILD */}
       <section className="overflow-x-hidden bg-[#F8F7F4] py-20 sm:py-32">
         <div className="mx-auto mb-12 max-w-7xl px-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))] text-center sm:mb-20 sm:px-6 md:px-12 lg:text-left">
@@ -320,7 +250,7 @@ const Home: React.FC = () => {
                 <img 
                   src={panel.img} 
                   alt={panel.title} 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
                   onError={(e) => {
                     const t = e.target as HTMLImageElement;
                     if (!t.dataset.fallback) {
@@ -387,7 +317,7 @@ const Home: React.FC = () => {
                 <img 
                   src={hrdcProject?.image || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200"} 
                   alt="University of Hyderabad Project" 
-                  className="h-auto w-full scale-105 grayscale-[0.3] transition-all duration-1000 group-hover:scale-100 group-hover:grayscale-0"
+                  className="h-auto w-full scale-105 transition-all duration-1000 group-hover:scale-100"
                   onError={(e) => {
                     const t = e.target as HTMLImageElement;
                     if (!t.dataset.fallback) {

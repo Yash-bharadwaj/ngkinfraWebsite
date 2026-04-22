@@ -1,5 +1,7 @@
 export interface ClientBrand {
   name: string;
+  /** Optional static logo path (served from /public), e.g. /logos/company.png */
+  logoPath?: string;
 }
 
 export type ProjectCategory = 'Institutional' | 'Residential' | 'Healthcare' | 'Infrastructure';

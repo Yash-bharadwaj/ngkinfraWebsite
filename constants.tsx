@@ -11,7 +11,7 @@ export const COLORS = {
 };
 
 /** Primary business email (site-wide). */
-export const PRIMARY_EMAIL = 'Shiva@ngkinfra.co.in';
+export const PRIMARY_EMAIL = 'info@ngkinfra.co.in';
 export const PRIMARY_EMAIL_HREF = `mailto:${PRIMARY_EMAIL}`;
 export const SITE_WEB_URL = 'https://www.ngkinfra.co.in';
 
@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'lakewood-villas',
-    name: 'Lakewood Villas',
+    name: 'Residentails',
     client: 'Saridena Constructions',
     location: 'Gandipet, Hyderabad',
     category: 'Residential',
@@ -52,7 +52,7 @@ export const PROJECTS: Project[] = [
     description:
       'Six premium villas for a combined programme of about 66,000 sq. ft., each villa designed to a high-end residential standard with coordinated structure, envelope, and interior-ready shell delivery.',
     scope: ['Luxury villas', 'Structural quality', 'Finishes coordination'],
-    image: PROJECT_IMAGE_LAKEWOOD
+    image: '/sanctamaria3.jpeg'
   },
   {
     id: 'sancta-maria',
@@ -76,7 +76,7 @@ export const PROJECTS: Project[] = [
     description:
       'Railway-related buildings along the third line between Nekonda and Warangal, executed to the tighter tolerances and coordination rhythms typical of transport infrastructure work alongside a manufacturing-led client team.',
     scope: ['Rail-adjacent civil buildings', 'Coordinated handoffs', 'Site execution discipline'],
-    image: 'https://images.unsplash.com/photo-1449156003053-c2d8244fe3ba?auto=format&fit=crop&q=80&w=1200'
+    image: '/railwayquaters.avif'
   }
 ];
 
@@ -142,12 +142,11 @@ export const PROCESS_STEPS: ProcessStep[] = [
 
 /** Partner / client names (shown as text on the site). */
 export const CLIENT_BRANDS: ClientBrand[] = [
-  { name: 'Central Public Works Department (CPWD)' },
+  { name: 'Central Public Works Department (CPWD)', logoPath: '/logos/cpwd.jpeg' },
   { name: 'N. Nageswara Rao & Co' },
-  { name: "Rainbow Children's Hospital" },
-  { name: 'BirthRight by Rainbow' },
-  { name: 'Sancta Maria International School' },
-  { name: 'Trisha Infracon Projects (P) Ltd' },
-  { name: 'Saridena Constructions' },
-  { name: 'Zetwerk' }
+  { name: "Rainbow Children's Hospital", logoPath: '/logos/rainbowhopital.png' },
+  { name: 'Sancta Maria International School', logoPath: '/logos/sanctamariaschoollogo.png' },
+  { name: 'Trisha Infracon Projects (P) Ltd', logoPath: '/logos/trishainfraxonprojects.png' },
+  { name: 'Saridena Constructions', logoPath: '/logos/saridenalogo.jpg' },
+  { name: 'Zetwerk', logoPath: '/logos/zetwerklogo.png' }
 ];

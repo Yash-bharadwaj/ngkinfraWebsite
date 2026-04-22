@@ -131,7 +131,15 @@ const Footer: React.FC = () => {
             © 2026 NGK Infra. All rights reserved.
           </p>
           <p className="text-center text-[9px] font-semibold uppercase tracking-[0.2em] text-white/25 sm:text-right sm:text-[10px]">
-            NICMAR-led delivery · Hyderabad
+            Designed and developed by{' '}
+            <a
+              href="https://clapinnmedia.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 transition-colors hover:text-white/80"
+            >
+              Clapinn Media
+            </a>
           </p>
         </div>
       </div>

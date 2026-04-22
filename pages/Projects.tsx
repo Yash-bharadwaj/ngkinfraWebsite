@@ -59,7 +59,7 @@ const Projects: React.FC = () => {
                   <img 
                     src={project.image} 
                     alt={project.name} 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000"
                     onError={(e) => {
                       const t = e.target as HTMLImageElement;
                       if (!t.dataset.fallback) {
@@ -86,9 +86,13 @@ const Projects: React.FC = () => {
                     <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-[#5F6B75] opacity-80 sm:text-[10px] md:text-[11px]">{project.client}</p>
                     <p className="mt-4 line-clamp-4 text-sm font-light leading-relaxed text-[#5F6B75]">{project.description}</p>
                   </div>
-                  <div className="flex min-w-0 flex-col gap-1 border-t border-[#E5E5E5] pt-4 md:border-l-0 md:border-r md:border-t-0 md:pt-0 md:pl-0 md:pr-6 md:text-right">
-                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#5F6B75] opacity-50 sm:text-[9px]">Site location</span>
-                    <span className="text-[10px] font-medium uppercase tracking-wide text-[#1A1A1A] sm:text-[11px]">{project.location}</span>
+                  <div className="flex min-w-0 flex-col gap-1.5 border-t border-[#E5E5E5] pt-4 md:max-w-[15rem] md:border-l-0 md:border-r md:border-t-0 md:pt-0 md:pl-0 md:pr-6 md:text-right">
+                    <span className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#5F6B75] opacity-50 sm:text-[9px]">
+                      Site location
+                    </span>
+                    <span className="text-[11px] font-medium leading-snug text-[#1A1A1A] sm:text-xs md:ml-auto md:max-w-[13.5rem] md:text-right">
+                      {project.location}
+                    </span>
                   </div>
                 </div>
               </motion.div>

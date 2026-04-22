@@ -50,7 +50,7 @@ const About: React.FC = () => {
               <img
                 src={ABOUT_HERO_IMAGE}
                 alt="NGK Infra — HRDC institutional project at completion"
-                className="h-auto w-full max-w-full object-cover object-center grayscale-[0.15] transition-[filter] duration-500 hover:grayscale-0"
+                className="h-auto w-full max-w-full object-cover object-center"
                 loading="eager"
                 decoding="async"
                 onError={(e) => {
@@ -212,7 +212,7 @@ const About: React.FC = () => {
                 transition={{ duration: 0.4 }}
                 className="flex min-h-[88px] items-stretch justify-center"
               >
-                <ClientLogo name={c.name} layout="card" className="max-w-[240px]" />
+                <ClientLogo name={c.name} logoPath={c.logoPath} layout="card" className="max-w-[240px]" />
               </motion.div>
             ))}
           </div>

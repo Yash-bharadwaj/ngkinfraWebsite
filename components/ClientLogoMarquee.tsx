@@ -13,7 +13,7 @@ const ClientLogoMarquee: React.FC = () => {
       <div className="overflow-x-hidden py-4">
         <div className="ngk-logo-marquee-track items-center gap-10 pr-10 md:gap-16 md:pr-16">
           {items.map((client, i) => (
-            <ClientLogo key={`${client.name}-${i}`} name={client.name} layout="strip" />
+            <ClientLogo key={`${client.name}-${i}`} name={client.name} logoPath={client.logoPath} layout="strip" />
           ))}
         </div>
       </div>
