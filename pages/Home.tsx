@@ -128,10 +128,7 @@ const Home: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
           >
-            <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#9CA8B3] sm:text-[11px] sm:tracking-[0.42em] md:text-xs md:tracking-[0.48em]">
-              Civil construction · EPC · Design & build
-            </span>
-            <h1 className="mt-5 break-words font-serif text-4xl leading-[0.95] tracking-tight sm:mt-6 sm:text-5xl md:mt-7 md:text-7xl lg:text-[8rem] xl:text-[9.5rem]">
+            <h1 className="mt-1 break-words font-serif text-4xl leading-[0.95] tracking-tight sm:mt-2 sm:text-5xl md:mt-3 md:text-7xl lg:text-[8rem] xl:text-[9.5rem]">
               NGK.
             </h1>
             <p className="mt-3 max-w-2xl font-sans text-[11px] font-semibold uppercase tracking-[0.28em] text-white/80 sm:mt-4 sm:text-xs sm:tracking-[0.34em] md:text-sm md:tracking-[0.38em]">
